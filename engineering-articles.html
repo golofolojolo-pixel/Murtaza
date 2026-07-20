@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Engineering Articles — Murtaza Corporation</title>
+<meta name="description" content="Practical articles on stainless steel materials, fabrication techniques, piping systems and corrosion prevention." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+<!-- ============================================================ -->
+<!-- Unified article card / summary styling.                       -->
+<!-- Move this block into style.css whenever convenient — it's      -->
+<!-- inline here so the new markup renders correctly immediately.   -->
+<!-- ============================================================ -->
+<style>
+  /* ---- Card (grid) — minimal: heading, date, topic group, read time.
+     No summary teaser on the card itself; that only appears after the
+     click-through, in the matching .article-section below. ---- */
+  #articles-grid .card { display:flex; flex-direction:column; }
+  #articles-grid .card-badge {
+    display:inline-block;
+    background:#111111; color:#ffffff; font-size:11px; font-weight:600;
+    padding:4px 10px; border-radius:20px; letter-spacing:.02em;
+    margin:0 0 10px;
+  }
+  .card-meta, .article-meta {
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+    font-size:13px; color:#8a8a8a; margin:0 0 8px;
+  }
+  .card-meta .dot, .article-meta .dot { opacity:.6; }
+  #articles-grid .card h3 { margin:0; font-size:19px; line-height:1.35; }
+
+  /* ---- Article detail section (shown after clicking a card) ---- */
+  .article-badge {
+    background:#111111; color:#ffffff; font-size:11px; font-weight:600;
+    padding:3px 10px; border-radius:20px; margin-right:2px;
+  }
+  .article-section { margin-top:56px; padding-top:24px; border-top:1px solid #ececec; scroll-margin-top:110px; }
+  .article-section h3 { font-size:26px; font-weight:600; margin:6px 0 20px; }
+  .article-section .btn { margin-top:8px; margin-right:8px; }
+
+  /* Small, justified summary paragraph inside the article section —
+     this is the only body copy shown post-click for curated articles. */
+  .article-summary {
+    color:var(--color-ink);
+    font-size:15px;
+    line-height:1.75;
+    text-align:justify;
+    text-justify:inter-word;
+    max-width:640px;
+    margin:0 0 20px;
+  }
+
+  /* Empty-state placeholder shown while AUTO-CARDS has no entries yet. */
+  #articles-empty {
+    padding:48px 24px;
+    text-align:center;
+    color:#8a8a8a;
+    font-size:15px;
+    border:1px dashed #dcdcdc;
+    border-radius:12px;
+  }
+</style>
+</head>
+<body>
+<div class="page-veil" aria-hidden="true"></div>
+
+<div class="header-hover-zone" id="headerHoverZone"></div>
+<header>
+  <div class="nav-inner">
+
+    <a href="index.html#top" class="logo" aria-label="Murtaza Corporation home">
+      <img src="Logos/company.png" alt="Murtaza Corporation" class="logo-img" />
+      <span class="logo-name">Murtaza Corporation</span>
+    </a>
+
+    <span class="nav-divider" aria-hidden="true"></span>
+
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#about">About</a></li>
+        <li class="nav-item-dropdown">
+          <a href="index.html#products" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Products <span class="nav-caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="pipes.html">Pipes</a></li>
+            <li><a href="fittings.html">Fittings</a></li>
+            <li><a href="valves.html">Valves</a></li>
+            <li><a href="flanges.html">Flanges</a></li>
+            <li><a href="tubes.html">Tubes</a></li>
+            <li><a href="dairy-tubes.html">Dairy tubes &amp; fittings</a></li>
+          </ul>
+        </li>
+        <li class="nav-item-dropdown">
+          <a href="index.html#resources" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Resources <span class="nav-caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="company-profile.html">Company profile</a></li>
+            <li><a href="lor.html">LOR</a></li>
+            <li><a href="mill-test-report.html">Mill Test Report</a></li>
+            <li><a href="services.html">Services</a></li>
+          </ul>
+        </li>
+        <li class="nav-item-dropdown">
+          <a href="index.html#track-record" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Updates <span class="nav-caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="linkedin-updates.html">LinkedIn Updates</a></li>
+            <li><a href="engineering-articles.html">Engineering Articles</a></li>
+            <li><a href="project-gallery.html">Project Gallery</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#contact" data-open-contact>Contact</a></li>
+      </ul>
+    </nav>
+
+    <span class="nav-divider" aria-hidden="true"></span>
+
+    <div class="nav-actions">
+      <button type="button" class="btn btn-primary btn-sm" data-open-quote>Request a quote <span class="arrow">&rarr;</span></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div id="top"></div>
+
+<section class="block" id="page-top">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow"><a href="index.html#track-record" style="color:inherit;">Updates</a> / Engineering Articles</p>
+      <h2 class="heading">Engineering Articles</h2>
+      <p class="sub-copy">Read practical articles covering stainless steel materials, fabrication techniques, piping systems, corrosion prevention and engineering best practices.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE CONTENT — ENGINEERING ARTICLES                           -->
+    <!--                                                                -->
+    <!-- CARD TEMPLATE (minimal — no summary teaser on the card):       -->
+    <!-- <a class="card" href="#article-SLUG">                         -->
+    <!--   <div class="card-body">                                      -->
+    <!--     <span class="card-badge">Topic group</span>                -->
+    <!--     <p class="card-meta"><span>Date</span><span class="dot">•</span><span>N min read</span></p> -->
+    <!--     <h3>Title</h3>                                             -->
+    <!--     <p class="hint">Read more &rarr;</p>                       -->
+    <!--   </div>                                                       -->
+    <!-- </a>                                                            -->
+    <!--                                                                -->
+    <!-- MATCHING ARTICLE-SECTION TEMPLATE (shown after click-through): -->
+    <!-- <div id="article-SLUG" class="article-section">                -->
+    <!--   <p class="article-meta">                                     -->
+    <!--     <span class="article-badge">Topic group</span>              -->
+    <!--     <span>Date</span><span class="dot">&middot;</span><span>N min read</span> -->
+    <!--   </p>                                                          -->
+    <!--   <h3>Title</h3>                                               -->
+    <!--   <p class="article-summary">Small, justified summary text.</p> -->
+    <!--   <a href="SOURCE_URL" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Read full article on DOMAIN <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a> -->
+    <!--   <a href="#articles-grid" class="btn btn-ghost btn-sm">&uarr; Back to articles</a> -->
+    <!-- </div>                                                          -->
+    <!--                                                                -->
+    <!-- Every card links to an in-page #article-SLUG section — never   -->
+    <!-- straight to an external site. The external link only appears   -->
+    <!-- as a button inside that section.                                -->
+    <!-- ============================================================ -->
+
+    <div class="grid-3 reveal" id="articles-grid" style="scroll-margin-top:110px;">
+      <!-- AUTO-CARDS:START (script inserts new card as first child here) -->
+      <a class="card card-curated" href="https://www.worldpipelines.com/regulations-and-standards/17062026/api-announces-47th-edition-of-foundational-line-pipe-standard/" target="_blank" rel="noopener noreferrer">
+        <div class="card-body">
+          <p class="num">worldpipelines.com &middot; curated &middot; 3 min read</p>
+          <h3>API announces 47th edition of foundational Line Pipe standard - World Pipelines</h3>
+          <p>The American Petroleum Institute has published the 47th edition of API Specification 5L for line pipe. This foundational standard outlines requirements for the safe manufacture of seamless and welded steel pipe used to transport oil, gas, and other energy products. The latest edition introduces critical requirements across more than 15 topic areas. Key updates focus on high-frequency weld pipe quality and requirements for pipelines transporting carbon dioxide. Technical revisions address hydrotest pressure gauge calibration, non-destructive evaluation personnel certification, and magnetic particle testing. The standard also updates guidelines for tensile test flattening, record retention, and sour-service performance. Additional changes include chemical element ranges, impact toughness requirements, lamination control, and sulfide stress cracking test requirements. Manufacturers capable of meeting these updated criteria can apply for the voluntary API Monogram licensing program. The new standard incorporates technical feedback and insights from subject matter experts representing more than a dozen countries.</p>
+          <p class="hint">Read full article <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></p>
+        </div>
+      </a>
+
+      <!-- AUTO-CARDS:END -->
+    </div>
+
+
+
+    <!-- AUTO-ARTICLES:START (script inserts new full article-section as first child here) -->
+    <!-- AUTO-ARTICLES:END -->
+
+    <!-- ============================================================ -->
+    <!-- END PAGE CONTENT                                              -->
+    <!-- ============================================================ -->
+
+    <div class="view-all reveal">
+      <a href="index.html#track-record" class="btn btn-ghost">
+        &larr; Back to all updates
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="Logos/company.png" alt="Murtaza Corporation" class="footer-logo-img" />
+    </div>
+
+    <div class="footer-col">
+      <h4>Address</h4>
+      <p>516/517, Sector 6-A, Mehran Town, Korangi Industrial Area, Karachi - 74900, Pakistan</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contacts</h4>
+      <p>Email: <a href="mailto:sales@murtazacorporation.com.pk">sales@murtazacorporation.com.pk</a></p>
+      <p>Phone: <a href="tel:+922135141451">+92 (21) 35141451</a></p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Links</h4>
+      <ul class="footer-link-list">
+        <li><a href="http://www.wermac.org/" target="_blank" rel="noopener">Wermac</a></li>
+        <li><a href="http://www.huikepipe.com/en/" target="_blank" rel="noopener">Hebei Huike</a></li>
+        <li><a href="http://www.yuandavalves.com/brand.html" target="_blank" rel="noopener">Yuanda Valve</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 Murtaza Corporation. All rights reserved.</div>
+</footer>
+
+<script src="script.js" defer></script>
+<script src="calculator-widget.js" defer></script>
+<script src="contact-widgets.js" defer></script>
+<a href="https://wa.me/923343791852" class="whatsapp-widget" target="_blank" aria-label="Chat on WhatsApp">
+    <span class="whatsapp-text">Chat with us</span>
+    <div class="whatsapp-icon"><i class="fab fa-whatsapp"></i></div>
+</a>
+</body>
+</html>

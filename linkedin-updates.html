@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LinkedIn Updates — Murtaza Corporation</title>
+<meta name="description" content="Project milestones, factory visits, exhibitions, certifications and company announcements from Murtaza Corporation." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+<!-- ============================================================ -->
+<!-- Simplified LinkedIn post card styling — image + "See more"     -->
+<!-- only. White by default, light grey on hover/focus/click. Move  -->
+<!-- into style.css whenever convenient — inline here so it renders  -->
+<!-- correctly immediately without touching the shared stylesheet.  -->
+<!-- ============================================================ -->
+<style>
+  .li-post-card {
+    background:#ffffff;
+    display:flex;
+    flex-direction:column;
+    border-radius:12px;
+    overflow:hidden;
+    transition:background-color .15s ease;
+  }
+  .li-post-card:hover,
+  .li-post-card:focus-visible,
+  .li-post-card:active {
+    background:#f0f0f0;
+  }
+  .li-post-card .li-post-image {
+    width:100%;
+    display:block;
+    aspect-ratio:1.2 / 1;
+    object-fit:contain;
+    background:#f5f5f5;
+  }
+  .li-post-card .li-post-link {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    padding:14px 12px;
+    font-size:14px;
+    font-weight:600;
+    color:var(--color-ink, #111111);
+  }
+</style>
+</head>
+<body>
+<div class="page-veil" aria-hidden="true"></div>
+
+<div class="header-hover-zone" id="headerHoverZone"></div>
+<header>
+  <div class="nav-inner">
+
+    <a href="index.html#top" class="logo" aria-label="Murtaza Corporation home">
+      <img src="Logos/company.png" alt="Murtaza Corporation" class="logo-img" />
+      <span class="logo-name">Murtaza Corporation</span>
+    </a>
+
+    <span class="nav-divider" aria-hidden="true"></span>
+
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#about">About</a></li>
+        <li class="nav-item-dropdown">
+          <a href="index.html#products" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Products <span class="nav-caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="pipes.html">Pipes</a></li>
+            <li><a href="fittings.html">Fittings</a></li>
+            <li><a href="valves.html">Valves</a></li>
+            <li><a href="flanges.html">Flanges</a></li>
+            <li><a href="tubes.html">Tubes</a></li>
+            <li><a href="dairy-tubes.html">Dairy tubes &amp; fittings</a></li>
+          </ul>
+        </li>
+        <li class="nav-item-dropdown">
+          <a href="index.html#resources" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Resources <span class="nav-caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="company-profile.html">Company profile</a></li>
+            <li><a href="lor.html">LOR</a></li>
+            <li><a href="mill-test-report.html">Mill Test Report</a></li>
+            <li><a href="services.html">Services</a></li>
+          </ul>
+        </li>
+        <li class="nav-item-dropdown">
+          <a href="index.html#track-record" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Updates <span class="nav-caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="linkedin-updates.html">LinkedIn Updates</a></li>
+            <li><a href="engineering-articles.html">Engineering Articles</a></li>
+            <li><a href="project-gallery.html">Project Gallery</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#contact" data-open-contact>Contact</a></li>
+      </ul>
+    </nav>
+
+    <span class="nav-divider" aria-hidden="true"></span>
+
+    <div class="nav-actions">
+      <button type="button" class="btn btn-primary btn-sm" data-open-quote>Request a quote <span class="arrow">&rarr;</span></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div id="top"></div>
+
+<section class="block" id="page-top">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow"><a href="index.html#track-record" style="color:inherit;">Updates</a> / LinkedIn Updates</p>
+      <h2 class="heading">LinkedIn Updates</h2>
+      <p class="sub-copy">Follow our latest project milestones, factory visits, exhibitions, certifications and company announcements shared directly by our team.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE CONTENT — 6 REAL LINKEDIN POST CARDS                     -->
+    <!-- Simplified card: image + "See more" only. Links below are the -->
+    <!-- real post URLs supplied.                                       -->
+    <!-- ============================================================ -->
+
+    <div class="li-follow-banner reveal">
+      <div class="li-follow-info">
+        <i class="fa-brands fa-linkedin"></i>
+        <div>
+          <strong>Murtaza Corporation on LinkedIn</strong>
+          <span>Project milestones, factory visits, and certifications — straight from our page.</span>
+        </div>
+      </div>
+      <a href="https://www.linkedin.com/company/murtaza-corporation/posts/?feedView=all" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+        Follow us <span class="arrow">&rarr;</span>
+      </a>
+    </div>
+
+    <div class="li-posts">
+
+      <!-- POST 1 -->
+      <a href="https://www.linkedin.com/posts/murtaza-corporation_industrialsolutions-pipesandtubes-constructionmaterials-activity-7452632664446185472-AlUT" target="_blank" rel="noopener" class="li-post-card">
+        <img src="likedin/1771569231864.jpg" alt="" class="li-post-image" />
+        <span class="li-post-link">See more <span class="arrow">&rarr;</span></span>
+      </a>
+
+      <!-- POST 2 -->
+      <a href="https://www.linkedin.com/posts/murtaza-corporation_industrialfittings-flanges-engineeringmaterials-activity-7455571748143501312-uxB7" target="_blank" rel="noopener" class="li-post-card">
+        <img src="likedin/1776846088646.jpg" alt="" class="li-post-image" />
+        <span class="li-post-link">See more <span class="arrow">&rarr;</span></span>
+      </a>
+
+      <!-- POST 3 -->
+      <a href="https://www.linkedin.com/posts/murtaza-corporation_industrialpipes-pipelinesystems-steelsolutions-activity-7471177278157320193-lwaK" target="_blank" rel="noopener" class="li-post-card">
+        <img src="likedin/1781267470242.jpg" alt="" class="li-post-image" />
+        <span class="li-post-link">See more <span class="arrow">&rarr;</span></span>
+      </a>
+
+      <!-- POST 4 -->
+      <a href="https://www.linkedin.com/posts/murtaza-corporation_murtazacorporation-flanges-industrialsolutions-activity-7477690572594573314-8n7M" target="_blank" rel="noopener" class="li-post-card">
+        <img src="likedin/1782820360204.jpg" alt="" class="li-post-image" />
+        <span class="li-post-link">See more <span class="arrow">&rarr;</span></span>
+      </a>
+
+      <!-- POST 5 -->
+      <a href="https://www.linkedin.com/feed/update/urn:li:share:7478059785721036800/" target="_blank" rel="noopener" class="li-post-card">
+        <img src="likedin/1782908387248.jpg" alt="" class="li-post-image" />
+        <span class="li-post-link">See more <span class="arrow">&rarr;</span></span>
+      </a>
+
+      <!-- POST 6 -->
+      <a href="https://www.linkedin.com/feed/update/urn:li:share:7478060163577589760/" target="_blank" rel="noopener" class="li-post-card">
+        <img src="likedin/1782908477616.jpg" alt="" class="li-post-image" />
+        <span class="li-post-link">See more <span class="arrow">&rarr;</span></span>
+      </a>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- END PAGE CONTENT                                              -->
+    <!-- ============================================================ -->
+
+    <div class="view-all reveal">
+      <a href="index.html#track-record" class="btn btn-ghost">
+        &larr; Back to all updates
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="Logos/company.png" alt="Murtaza Corporation" class="footer-logo-img" />
+    </div>
+
+    <div class="footer-col">
+      <h4>Address</h4>
+      <p>516/517, Sector 6-A, Mehran Town, Korangi Industrial Area, Karachi - 74900, Pakistan</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contacts</h4>
+      <p>Email: <a href="mailto:sales@murtazacorporation.com.pk">sales@murtazacorporation.com.pk</a></p>
+      <p>Phone: <a href="tel:+922135141451">+92 (21) 35141451</a></p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Links</h4>
+      <ul class="footer-link-list">
+        <li><a href="http://www.wermac.org/" target="_blank" rel="noopener">Wermac</a></li>
+        <li><a href="http://www.huikepipe.com/en/" target="_blank" rel="noopener">Hebei Huike</a></li>
+        <li><a href="http://www.yuandavalves.com/brand.html" target="_blank" rel="noopener">Yuanda Valve</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 Murtaza Corporation. All rights reserved.</div>
+</footer>
+
+<script src="script.js" defer></script>
+<script src="calculator-widget.js" defer></script>
+<script src="contact-widgets.js" defer></script>
+<a href="https://wa.me/923343791852" class="whatsapp-widget" target="_blank" aria-label="Chat on WhatsApp">
+    <span class="whatsapp-text">Chat with us</span>
+    <div class="whatsapp-icon"><i class="fab fa-whatsapp"></i></div>
+</a>
+</body>
+</html>
