@@ -27,7 +27,7 @@
     --radius-lg:8px;
     --radius-full:9999px;
 
-    --page-max-width:1280px;
+    --page-max-width:1600px;
     --section-gap:80px;
   }
 
@@ -382,17 +382,23 @@
   /* ---------- Client strip / marquee ---------- */
   .clients-wrap{
     padding:32px 0;
+    overflow:hidden;
+  }
+  .clients-heading{
+    text-align:center;
+    margin:0 0 24px;
+  }
+  .clients-wrap .clients-track-wrap{
     -webkit-mask-image:linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
     mask-image:linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
     overflow:hidden;
   }
   .clients-track{
-    display:flex;align-items:center;gap:72px;width:max-content;
-    animation:marquee-ltr 42s linear infinite;
+    display:flex;align-items:center;gap:64px;width:max-content;
+    animation:marquee-ltr 20s linear infinite;
   }
-  .clients-wrap:hover .clients-track{animation-play-state:paused;}
   .clients-track img{
-    height:34px;width:auto;object-fit:contain;
+    height:56px;width:auto;object-fit:contain;
     opacity:.9;
     transition:opacity .25s ease, transform .2s ease;
   }
@@ -651,6 +657,34 @@
   @media (max-width:760px){
     .resources-drawer{grid-template-columns:1fr;}
   }
+  /* ---------- Clients we serve (static logo grid) ---------- */
+  .clients-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:24px;
+    margin-top:16px;
+  }
+  .clients-grid-item{
+    display:flex;align-items:center;justify-content:center;
+    background:var(--color-bone);
+    border:1px solid var(--color-ash);
+    border-radius:12px;
+    padding:24px;
+    min-height:100px;
+  }
+  .clients-grid-item img{
+    max-height:56px;max-width:100%;width:auto;object-fit:contain;
+    filter:grayscale(20%);
+    transition:transform .2s ease, filter .2s ease;
+  }
+  .clients-grid-item:hover img{transform:scale(1.06);filter:grayscale(0);}
+  @media (max-width:760px){
+    .clients-grid{grid-template-columns:repeat(2, 1fr);}
+  }
+  @media (max-width:420px){
+    .clients-grid{grid-template-columns:1fr;}
+  }
+
   /* ---------- Logo marquee (partners / brands strip) ---------- */
   .logo-marquee{
     margin-top:56px;
