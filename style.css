@@ -27,7 +27,7 @@
     --radius-lg:8px;
     --radius-full:9999px;
 
-    --page-max-width:1440px;
+    --page-max-width:1560px;
     --section-gap:80px;
   }
 
@@ -384,12 +384,15 @@
   /* ---------- Client strip / marquee ---------- */
   .clients-wrap-heading{
     text-align:center;
-    font-size:13px;
-    font-weight:600;
-    letter-spacing:.04em;
-    text-transform:uppercase;
-    color:var(--color-stone);
-    margin:0 0 4px;
+    font-size:26px;
+    font-weight:400;
+    letter-spacing:-0.02em;
+    line-height:1.2;
+    color:var(--color-ink);
+    margin:0 0 8px;
+  }
+  @media (min-width:640px){
+    .clients-wrap-heading{font-size:32px;}
   }
   .clients-wrap{
     padding:36px 0;
@@ -403,24 +406,33 @@
     width:max-content;
     will-change:transform;
     animation:clientsScroll 26s linear infinite;
+    /* Always keep scrolling — never pause on hover, even if something else tries to pause it */
+    animation-play-state:running !important;
+  }
+  .clients-wrap:hover .clients-track,
+  .clients-track:hover{
+    animation-play-state:running !important;
   }
   .clients-set{
     display:flex;align-items:center;gap:64px;
     padding-right:64px;
     flex-shrink:0;
   }
+  /* Fixed logo card size — 200x100px. Export/crop logo files close to this
+     size (transparent background, minimal padding) so they fill the card
+     cleanly. This size is fixed in pixels and does not auto-shrink or
+     auto-scale on different screens/resolutions. */
   .clients-track .logo-box{
     display:flex;
     align-items:center;
     justify-content:center;
-    width:140px;
-    height:56px;
+    width:200px;
+    height:100px;
     flex-shrink:0;
   }
   .clients-track img{
-    max-height:100%;
-    max-width:100%;
-    width:auto;height:auto;
+    width:100%;
+    height:100%;
     object-fit:contain;
     opacity:.85;
     transition:opacity .25s ease, transform .2s ease;
@@ -437,7 +449,7 @@
     to{transform:translateX(-50%);}
   }
   @media (prefers-reduced-motion: reduce){
-    .clients-track{animation:none;}
+    .clients-track{animation:none !important;}
   }
 
   /* ---------- Clients we served (collage) ---------- */
@@ -475,7 +487,7 @@
   /* section.block padding + border now defined above, near button styles */
   .band-bone{background:var(--color-bone);}
 
-  .section-head{max-width:560px;margin:0 auto 40px;text-align:center;}
+  .section-head{max-width:680px;margin:0 auto 40px;text-align:center;}
   .eyebrow{
     font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0;
     color:var(--color-stone);margin:0 0 12px;
