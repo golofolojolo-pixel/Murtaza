@@ -339,8 +339,11 @@
     text-shadow:0 1px 12px rgba(0,0,0,.4);
   }
   .hero-content h1{
-    font-size:32px;font-weight:400;letter-spacing:-0.02em;line-height:1.2;
+    font-size:clamp(26px, 6vw, 44px);
+    font-weight:400;letter-spacing:-0.02em;line-height:1.22;
     margin:0 0 18px;
+    text-wrap:balance;
+    overflow-wrap:break-word;
     text-shadow:0 2px 20px rgba(0,0,0,.45);
   }
   .hero-content .sub{
@@ -354,11 +357,10 @@
 
   @media (min-width:640px){
     .hero-content{padding-left:48px;}
-    .hero-content h1{font-size:44px;}
   }
   @media (max-width:640px){
     .hero{min-height:74vh;}
-    .hero-content{max-width:100%;}
+    .hero-content{max-width:100%;padding:40px 20px;}
   }
 
   /* ---------- Trust bar (under hero) ---------- */
@@ -381,19 +383,22 @@
 
   /* ---------- Client strip / marquee ---------- */
   .clients-wrap{
-    padding:32px 0;
-    -webkit-mask-image:linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-    mask-image:linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    padding:36px 0;
+    -webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+    mask-image:linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
     overflow:hidden;
   }
   .clients-track{
     display:flex;
+    align-items:center;
     width:max-content;
-    animation:clientsScroll 36s linear infinite;
+    will-change:transform;
+    animation:clientsScroll 26s linear infinite;
   }
   .clients-set{
-    display:flex;align-items:center;gap:56px;
-    padding-right:56px;
+    display:flex;align-items:center;gap:64px;
+    padding-right:64px;
+    flex-shrink:0;
   }
   .clients-wrap:hover .clients-track{animation-play-state:paused;}
   .clients-track .logo-box{
@@ -409,14 +414,16 @@
     max-width:100%;
     width:auto;height:auto;
     object-fit:contain;
-    opacity:.9;
+    opacity:.85;
     transition:opacity .25s ease, transform .2s ease;
   }
   .clients-track .logo-box:hover img{opacity:1;transform:scale(1.06);}
   .clients-track .logo-placeholder{
-    border:1.5px dashed #d8d8d8;
-    border-radius:8px;
+    display:none; /* no empty dashed boxes in the live loop — add real logos as they arrive */
   }
+  /* Right-to-left flow: content enters from the right, exits to the left.
+     There are exactly 2 identical .clients-set duplicates in the track, so
+     -50% moves exactly one full set's width, making the loop seamless. */
   @keyframes clientsScroll{
     from{transform:translateX(0);}
     to{transform:translateX(-50%);}
