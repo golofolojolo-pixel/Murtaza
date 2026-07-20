@@ -396,7 +396,7 @@
 
   .clients-track{
     display:flex;align-items:center;gap:72px;width:max-content;
-animation:marquee-ltr 20s linear infinite;  }
+animation:marquee-ltr 12s linear infinite;  }
   .clients-wrap:hover .clients-track{animation-play-state:paused;}
   .clients-track img{
     height:34px;width:auto;object-fit:contain;
@@ -413,11 +413,13 @@ animation:marquee-ltr 20s linear infinite;  }
   }
 .clients-label{
     text-align:center;
-    font-size:13px;
+    font-size:15px;
+    font-weight:600;
     letter-spacing:.06em;
     text-transform:uppercase;
     color:var(--color-stone);
-    margin:0 0 4px;
+    margin:0 0 20px;
+    padding-top:12px;
 }
 
   /* ---------- Sections ---------- */
