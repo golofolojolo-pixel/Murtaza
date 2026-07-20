@@ -1,1747 +1,557 @@
-:root{
-    --color-canvas-white:#ffffff;
-    --color-bone:#f1efe9;
-    --color-ash:#ececec;
-    --color-stone:#6a6a6a;
-    --color-graphite:#333333;
-    --color-ink:#1f1d1e;
-    --color-obsidian:#000000;
-    --color-cobalt-ink:#1e37a0;
-    --color-cobalt-ink-hover:#16297a;
-
-    --font-lunar:'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-
-    --text-caption:14px;   --tracking-caption:-0.03em;
-    --text-body-sm:16px;   --tracking-body-sm:-0.03em;
-    --text-body:20px;      --tracking-body:-0.03em;
-    --text-subheading:24px;--tracking-subheading:-0.03em;
-    --text-heading-sm:32px;--tracking-heading-sm:-0.03em;
-    --text-heading:48px;   --tracking-heading:-0.03em;
-    --text-heading-lg:64px;--tracking-heading-lg:-0.03em;
-    --text-display:112px;  --tracking-display:-0.03em;
-
-    --space-4:4px; --space-8:8px; --space-12:12px; --space-16:16px;
-    --space-24:24px; --space-32:32px; --space-40:40px; --space-48:48px;
-    --space-64:64px; --space-112:112px; --space-140:140px; --space-160:160px;
-
-    --radius-lg:8px;
-    --radius-full:9999px;
-
-    --page-max-width:1280px;
-    --section-gap:80px;
-  }
-
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
-  }
-
-  body{
-    margin:0;
-    font-family:var(--font-lunar);
-    letter-spacing:var(--tracking-body-sm);
-    color:var(--color-ink);
-    background:var(--color-canvas-white);
-    -webkit-font-smoothing:antialiased;
-  }
-
-  a{color:inherit;text-decoration:none;}
-  img{display:block;max-width:100%;}
-  button{font-family:inherit;cursor:pointer;}
-
-  .wrap{max-width:var(--page-max-width);margin:0 auto;padding:0 24px;}
-
-  /* ---------- Buttons ---------- */
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    font-family:inherit;font-size:15px;font-weight:500;letter-spacing:-0.02em;
-    border-radius:var(--radius-full);
-    padding:13px 26px;
-    border:1px solid transparent;
-    text-decoration:none;cursor:pointer;box-sizing:border-box;
-    transition:background .18s ease, color .18s ease, border-color .18s ease, transform .12s ease, box-shadow .18s ease;
-    white-space:nowrap;
-  }
-  .btn:active{transform:scale(.97);}
-  .btn .arrow{display:inline-block;transition:transform .2s ease;}
-  .btn:hover .arrow{transform:translateX(3px);}
-  .btn-primary{
-    background:var(--color-cobalt-ink);
-    color:#fff;
-    border:2px solid var(--color-cobalt-ink);
-}
-  .btn-primary:hover{
-    background:var(--color-cobalt-ink-hover);
-    border-color:var(--color-cobalt-ink-hover);
-    transform:translateY(-2px);
-    box-shadow:0 8px 26px -6px rgba(30,55,160,.65);
-  }
-  .btn-ghost{
-    background:transparent;
-    color:#fff;
-    border:2px solid rgba(255,255,255,.9);
-}
-  .btn-ghost:hover{
-    background:var(--color-obsidian);
-    color:#fff;
-    border-color:var(--color-obsidian);
-    transform:translateY(-2px);
-  }
-  .btn-sm{padding:9px 18px;font-size:13px;}
-  .btn:focus-visible{outline:2px solid var(--color-cobalt-ink);outline-offset:2px;}
-
-  /* ---------- Haptic prominent CTA (e.g. "View all products") ---------- */
-  .btn-cta{
-    position:relative;overflow:hidden;isolation:isolate;
-    display:inline-flex;align-items:center;justify-content:center;
-    border-radius:var(--radius-full);
-    padding:15px 30px;
-    background:transparent;
-    border:1.5px solid var(--color-obsidian);
-    color:var(--color-obsidian);
-    font-family:inherit;font-size:15px;font-weight:500;letter-spacing:-0.02em;
-    text-decoration:none;cursor:pointer;box-sizing:border-box;
-    transition:color .35s ease, border-color .35s ease,
-               transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease;
-  }
-  .btn-cta::before{
-    content:"";position:absolute;inset:0;border-radius:inherit;
-    background:var(--color-cobalt-ink);
-    transform:scaleX(0);transform-origin:left;
-    transition:transform .45s cubic-bezier(.65,0,.35,1);
-    z-index:-1;
-  }
-  .btn-cta-label{display:inline-flex;align-items:center;gap:8px;position:relative;}
-  .btn-cta:hover::before{transform:scaleX(1);}
-  .btn-cta:hover{
-    color:#fff;border-color:var(--color-cobalt-ink);
-    transform:scale(1.06);
-    box-shadow:0 12px 32px -10px rgba(30,55,160,.55);
-  }
-  .btn-cta:active{transform:scale(.95);}
-  .btn-cta .arrow{display:inline-block;transition:transform .25s ease;}
-  .btn-cta:hover .arrow{transform:translateX(5px);}
-  .btn-cta:focus-visible{outline:2px solid var(--color-cobalt-ink);outline-offset:3px;}
-
-  /* ---------- Section separations ---------- */
-  section.block{
-    padding:var(--section-gap) 24px;
-    border-top:1px solid #ececec;
-    position:relative;
-  }
-  section.block#about{border-top:none;}
-
-  /* ---------- Nav ---------- */
-  header{
-    position:sticky;top:0;z-index:50;
-    background:rgba(255,255,255,.9);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid #ececec;
-    transition:box-shadow .25s ease, border-color .25s ease, transform .3s ease, opacity .3s ease;
-  }
-  header.header-hidden{
-    transform:translateY(-100%);
-    opacity:0;
-  }
-  .header-hover-zone{
-    position:fixed;top:0;left:0;right:0;height:16px;z-index:51;
-  }
-  header.scrolled{
-    box-shadow:0 4px 24px -12px rgba(0,0,0,.15);
-    border-bottom-color:#e2e2e2;
-  }
-  .nav-inner{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:14px clamp(20px, 3vw, 48px);
-    width:100%;
-    gap:20px;
-  }
-  .nav-divider{
-    width:1px;align-self:stretch;
-    background:linear-gradient(to bottom, transparent, #d8d8d8 20%, #d8d8d8 80%, transparent);
-    flex-shrink:0;
-  }
-  .logo{
-    font-weight:700;font-size:14px;line-height:1.2;color:var(--color-cobalt-ink);
-    letter-spacing:0.01em;
-    display:flex;align-items:center;gap:10px;
-  }
-  .logo-name{
-    font-weight:700;font-size:16px;color:var(--color-ink);white-space:nowrap;
-  }
-  @media (max-width:480px){
-    .logo-name{display:none;}
-  }
-.logo-img{
-    height:100%;
-    max-height:38px;
-    width:auto;
-    display:block;
-    object-fit:contain;
-}
-  .footer-logo-img{height:38px;width:auto;object-fit:contain;}
-.nav-inner nav{flex:1;display:flex;justify-content:flex-end;}
-  .nav-links{
-    display:flex;align-items:center;gap:28px;font-size:16px;font-weight:600;list-style:none;margin:0;padding:0 24px 0 0;
-  }
- .nav-links a{position:relative;padding:4px 0;color:var(--color-ink);transition:color .2s ease;}
-.nav-links a:hover{color:var(--color-cobalt-ink);}
-  .nav-links a::after{
-    content:"";position:absolute;left:0;bottom:0;height:1px;width:0;
-    background:var(--color-cobalt-ink);transition:width .2s ease;
-  }
-  .nav-links a:hover::after{width:100%;}
-  .nav-links a.active{color:var(--color-cobalt-ink);}
-  .nav-links a.active::after{width:100%;}
-  .nav-actions{display:flex;gap:10px;align-items:center;}
-  .nav-toggle{display:none;background:none;border:none;padding:8px;}
-  .nav-toggle span{display:block;width:22px;height:2px;background:var(--color-obsidian);margin:5px 0;transition:transform .2s ease, opacity .2s ease;}
-/* ---------- Reactive / haptic-feel press states ---------- */
-  .nav-links a, .nav-actions .btn, .nav-toggle, .logo{
-    transition:transform .12s ease, color .2s ease, opacity .2s ease;
-    -webkit-tap-highlight-color:transparent;
-  }
-  .nav-links a:active, .logo:active{transform:scale(.94);}
-  .nav-actions .btn:active{transform:scale(.95);}
-  .nav-toggle:active{transform:scale(.88);}
-  .nav-links a.pressed, .logo.pressed{transform:scale(.94);}
-  .nav-actions .btn.pressed{transform:scale(.95);}
-  .nav-toggle.pressed{transform:scale(.88);}
-  @media (max-width:1024px){
-    .nav-links{gap:20px;}
-  }
-
-  @media (max-width:860px){
-    .nav-links{
-      align-items:flex-start;
-      position:fixed;inset:65px 0 0 0;background:#fff;flex-direction:column;
-      padding:32px 24px;gap:22px;font-size:20px;
-      transform:translateY(-8px);opacity:0;pointer-events:none;
-      transition:opacity .2s ease, transform .2s ease;
-    }
-    .nav-links.open{opacity:1;transform:translateY(0);pointer-events:auto;}
-    .nav-toggle{display:block;}
-  }
-
-  @media (max-width:480px){
-    .nav-inner{padding:12px 16px;gap:10px;}
-    .logo-img{height:36px;}
-    .nav-actions{gap:8px;}
-    .nav-actions .btn-sm{padding:8px 12px;font-size:12px;}
-  }
-
-  /* ---------- Products nav dropdown ---------- */
-  .nav-item-dropdown{position:relative;}
-  .nav-dropdown-toggle{display:inline-flex;align-items:center;gap:4px;}
-  .nav-caret{font-size:11px;transition:transform .2s ease;}
-  .nav-item-dropdown.open .nav-caret{transform:rotate(180deg);}
-
-  /* Invisible bridge spanning the full menu width — keeps hover alive
-     while the cursor crosses the gap between the toggle and the menu,
-     even when moving diagonally toward the wider menu. */
-  .nav-item-dropdown::after{
-    content:"";
-    position:absolute;
-    top:100%;left:50%;
-    transform:translateX(-50%);
-    width:200px;height:14px;
-    z-index:59;
-  }
-
-  .nav-dropdown-menu{
-    position:absolute;top:calc(100% + 14px);left:50%;
-    transform:translate(-50%,8px);
-    min-width:200px;list-style:none;margin:0;padding:8px;
-    background:#fff;border:1px solid #ececec;border-radius:12px;
-    box-shadow:0 16px 40px -12px rgba(0,0,0,.18);
-    opacity:0;pointer-events:none;
-    transition:opacity .18s ease, transform .18s ease;
-    z-index:60;
-  }
-  .nav-dropdown-menu a{
-    display:block;padding:9px 12px;border-radius:8px;
-    font-weight:500;font-size:14px;color:var(--color-ink);
-    transition:background .15s ease, color .15s ease;
-  }
-  .nav-dropdown-menu a:hover{background:#f3f5fb;color:var(--color-cobalt-ink);}
-  .nav-dropdown-menu a::after{display:none;}
-  .nav-dropdown-menu a.active{background:#eef1fb;color:var(--color-cobalt-ink);}
-
-  .nav-item-dropdown:hover .nav-dropdown-menu,
-  .nav-item-dropdown.open .nav-dropdown-menu{
-    opacity:1;pointer-events:auto;transform:translate(-50%,0);
-  }
-
-  @media (max-width:860px){
-    .nav-item-dropdown::after{display:none;}
-    .nav-dropdown-menu{
-      position:static;transform:none;opacity:1;pointer-events:auto;
-      box-shadow:none;border:none;background:transparent;
-      display:none;padding:4px 0 4px 14px;
-    }
-    .nav-item-dropdown.open .nav-dropdown-menu{display:block;}
-    .nav-dropdown-menu a{font-size:16px;padding:8px 0;}
-  }
-
-  /* ---------- Hero ---------- */
-  .hero{
-    position:relative;
-    min-height:82vh;
-    display:flex;align-items:center;justify-content:flex-start;
-    text-align:left;overflow:hidden;
-  }
-  .hero-bg{
-    position:absolute;inset:0;
-    background:#0a0a0a;
-  }
-  .hero-bg video{
-    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-    filter:grayscale(20%) brightness(.8);
-    transform:scale(1.1);
-    animation:heroZoomOut 2.4s cubic-bezier(.16,1,.3,1) both;
-  }
-  @keyframes heroZoomOut{
-    from{transform:scale(1.14);}
-    to{transform:scale(1);}
-  }
-  @keyframes heroFadeUp{
-    from{opacity:0;transform:translateY(22px);}
-    to{opacity:1;transform:translateY(0);}
-  }
-  .hero-content p.eyebrow{animation:heroFadeUp .8s cubic-bezier(.16,1,.3,1) both;animation-delay:.2s;}
-  .hero-content h1{animation:heroFadeUp .9s cubic-bezier(.16,1,.3,1) both;animation-delay:.38s;}
-  .hero-content .sub{animation:heroFadeUp .9s cubic-bezier(.16,1,.3,1) both;animation-delay:.56s;}
-  .hero-actions{animation:heroFadeUp .9s cubic-bezier(.16,1,.3,1) both;animation-delay:.74s;}
-  @media (prefers-reduced-motion: reduce){
-    .hero-bg video, .hero-content p.eyebrow, .hero-content h1, .hero-content .sub, .hero-actions{
-      animation:none;
-    }
-  }
-  .hero-bg::after{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(90deg,
-      rgba(10,10,10,.82) 0%,
-      rgba(10,10,10,.62) 30%,
-      rgba(10,10,10,.28) 55%,
-      rgba(10,10,10,.05) 75%,
-      rgba(10,10,10,0) 100%);
-  }
-  .hero-content{
-    position:relative;z-index:1;max-width:520px;
-    padding:48px clamp(24px, 5vw, 64px);color:#fff;
-    margin-left:0;margin-right:auto;
-  }
-  .hero-content p.eyebrow{
-    font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:#f1efe9;
-    margin:0 0 16px;opacity:.95;
-    text-shadow:0 1px 12px rgba(0,0,0,.4);
-  }
-  .hero-content h1{
-    font-size:38px;font-weight:400;letter-spacing:-0.03em;line-height:1.08;
-    margin:0 0 18px;
-    text-shadow:0 2px 20px rgba(0,0,0,.45);
-  }
-  .hero-content .sub{
-    font-size:16px;line-height:1.6;letter-spacing:0;color:#f1efe9;opacity:.95;margin:0 0 32px;max-width:420px;
-    margin-left:0;margin-right:0;
-    text-shadow:0 1px 12px rgba(0,0,0,.4);
-  }
-  .hero-actions{display:flex;gap:12px;justify-content:flex-start;flex-wrap:wrap;}
-  .hero .btn-ghost{border-color:#fff;color:#fff;}
-  .hero .btn-ghost:hover{background:#fff;color:var(--color-obsidian);}
-
-  @media (min-width:640px){
-    .hero-content h1{font-size:52px;}
-  }
-  @media (max-width:640px){
-    .hero{min-height:74vh;}
-    .hero-content{max-width:100%;}
-  }
-
-  /* ---------- Trust bar (under hero) ---------- */
-  .trust-bar{background:var(--color-ink);color:#fff;padding:28px 0;}
-  .trust-bar-inner{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
-  }
-  .trust-stat{text-align:center;}
-  .trust-stat .n{font-size:28px;font-weight:600;letter-spacing:-0.02em;color:#fff;}
-  .trust-stat .l{font-size:12px;color:#b8b8b8;margin-top:4px;line-height:1.35;}
-  @media (max-width:760px){
-    .trust-bar-inner{grid-template-columns:repeat(2,1fr);gap:20px;}
-  }
-
-  /* ---------- About intro line ---------- */
-  .about-intro{
-    font-size:16px;color:var(--color-graphite);line-height:1.6;letter-spacing:0;
-    margin:14px 0 24px;max-width:60ch;
-  }
-
-  /* ---------- Client strip / marquee ---------- */
-  .clients-wrap{
-    padding:32px 0;
-    -webkit-mask-image:linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-    mask-image:linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-    overflow:hidden;
-  }
-  .clients-track{
-    display:flex;align-items:center;gap:72px;width:max-content;
-    animation:marquee-ltr 12s linear infinite;
-  }
-  .clients-wrap:hover .clients-track{animation-play-state:paused;}
-  .clients-track img{
-    height:34px;width:auto;object-fit:contain;
-    opacity:.9;
-    transition:opacity .25s ease, transform .2s ease;
-  }
-  .clients-track img:hover{opacity:1;transform:scale(1.05);}
-  @keyframes marquee-ltr{
-    from{transform:translateX(-50%);}
-    to{transform:translateX(0%);}
-  }
-  @media (prefers-reduced-motion: reduce){
-    .clients-track{animation:none;}
-  }
-  .clients-label{
-    text-align:center;
-    font-size:15px;
-    font-weight:600;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    color:var(--color-stone);
-    margin:0 0 20px;
-    padding-top:12px;
-  }
-  .clients-collage{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:20px;
-  }
-  .clients-collage-item{
-    background:#fff;
-    border:1px solid #ececec;
-    border-radius:var(--radius-lg);
-    padding:24px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    min-height:110px;
-    transition:box-shadow .2s ease, transform .2s ease;
-  }
-  .clients-collage-item:hover{
-    box-shadow:0 10px 24px rgba(0,0,0,.08);
-    transform:translateY(-2px);
-  }
-  .clients-collage-item img{
-    max-height:48px;
-    max-width:100%;
-    width:auto;
-    object-fit:contain;
-  }
-  @media (max-width:900px){
-    .clients-collage{grid-template-columns:repeat(2, 1fr);}
-  }
-  @media (max-width:480px){
-    .clients-collage{grid-template-columns:1fr;}
-  }
-
-  /* ---------- Sections ---------- */
-  /* section.block padding + border now defined above, near button styles */
-  .band-bone{background:var(--color-bone);}
-
-  .section-head{max-width:560px;margin:0 auto 40px;text-align:center;}
-  .eyebrow{
-    font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0;
-    color:var(--color-stone);margin:0 0 12px;
-  }
-  h2.heading{
-    font-size:30px;font-weight:400;letter-spacing:-0.03em;line-height:1.15;margin:0 0 14px;
-  }
-  .sub-copy{font-size:15px;color:var(--color-stone);line-height:1.6;letter-spacing:0;margin:0;max-width:65ch;}
-  .standards-line{
-    font-size:13px;color:var(--color-stone);margin:16px 0 0;
-    padding-top:14px;border-top:1px solid #ececec;
-  }
-  .standards-line strong{color:var(--color-ink);font-weight:500;}
-
-  @media (min-width:640px){
-    h2.heading{font-size:38px;}
-  }
-
-  /* ---------- Products section: left-aligned, larger body copy ---------- */
-  #products .section-head{
-    max-width:720px;margin:0 0 40px;text-align:left;
-  }
-  #products .sub-copy{font-size:18px;line-height:1.65;max-width:62ch;}
-  #products .standards-line{font-size:15px;}
-
-  /* ---------- Resources section: left-aligned, larger body copy ---------- */
-  #resources .section-head{
-    max-width:720px;margin:0 0 40px;text-align:left;
-  }
-  #resources .sub-copy{font-size:18px;line-height:1.65;max-width:62ch;}
-
-  /* ---------- Sub-pages (Services, LOR, etc.): left-aligned heading ---------- */
-  #page-top .section-head{
-    max-width:720px;margin:0 0 40px;text-align:left;
-  }
-  #page-top .sub-copy{font-size:18px;line-height:1.65;max-width:62ch;}
-
-  /* ---------- Clickable-card affordance (Resources cards) ---------- */
-  #resources .card{
-    cursor:pointer;position:relative;transition:transform .18s ease, box-shadow .18s ease;
-  }
-  #resources .card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 12px 28px rgba(0,0,0,0.12);
-  }
-  #resources .card .card-open{
-    position:absolute;top:14px;right:14px;
-    width:34px;height:34px;border-radius:50%;
-    background:var(--color-ink);color:#fff;
-    display:flex;align-items:center;justify-content:center;
-    font-size:16px;line-height:1;
-    opacity:0;transform:translateY(-4px);
-    transition:opacity .18s ease, transform .18s ease;
-  }
-  #resources .card:hover .card-open{opacity:1;transform:translateY(0);}
-  #resources .card-body p.hint{
-    font-size:13px;color:var(--color-stone);margin-top:8px;
-  }
-
-  #resources .grid-3{max-width:none;}
-
- .grid-3{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
-    gap:32px;
-    width:100%;
-    max-width:1380px;
-    margin:0 auto;
-}
-  @media (max-width:760px){
-    .grid-3{grid-template-columns:1fr;}
-  }
-.card{
-    position:relative;
-    display:flex;
-    flex-direction:column;
-    height:100%;
-    text-align:left;
-    border-radius:var(--radius-lg);
-    overflow:hidden;
-    background:#fff;
-    border:1px solid #ececec;
-    cursor:pointer;
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease,
-        border-color .35s ease;
-}
-.card::after{
-    content:"→";
-    position:absolute;
-
-    top:18px;
-    right:18px;
-
-    width:42px;
-    height:42px;
-
-    border-radius:50%;
-
-    background:var(--color-cobalt-ink);
-
-    color:#fff;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:18px;
-
-    opacity:0;
-
-    transform:translateY(-10px) scale(.8);
-
-    transition:opacity .3s ease, transform .3s ease;
-}
-.card:hover::after{
-    opacity:1;
-    transform:translateY(0) scale(1);
-    animation:cardArrowPulse 1.6s ease-out infinite;
-}
-@keyframes cardArrowPulse{
-    0%{box-shadow:0 0 0 0 rgba(30,55,160,.55);}
-    70%{box-shadow:0 0 0 14px rgba(30,55,160,0);}
-    100%{box-shadow:0 0 0 0 rgba(30,55,160,0);}
-}/* ---------- Products cards: "Click here" style CTA instead of circle-arrow ---------- */
-#products .card::after{
-    content:"Click here \2192";
-    top:auto;
-    bottom:18px;
-    right:18px;
-    left:auto;
-    width:auto;
-    height:auto;
-    padding:9px 16px;
-    border-radius:var(--radius-full);
-    font-size:13px;
-    font-weight:600;
-    letter-spacing:-0.01em;
-    background:var(--color-cobalt-ink);
-    color:#fff;
-    opacity:0;
-    transform:translateY(12px);
-    transition:opacity .3s ease, transform .3s ease;
-    animation:none;
-    z-index:2;
-}
-#products .card:hover::after{
-    opacity:1;
-    transform:translateY(0);
-    animation:productCtaBounce 1.8s ease-in-out infinite;
-}
-@keyframes productCtaBounce{
-    0%, 100%{transform:translateY(0) scale(1);}
-    50%{transform:translateY(-4px) scale(1.03);}
-}
-@media (prefers-reduced-motion: reduce){
-    #products .card:hover::after{animation:none;}
-}
-@media (prefers-reduced-motion: reduce){
-    .card:hover::after{animation:none;}
-}
-  .card:hover{
-    transform:translateY(-10px);
-    border-color:var(--color-cobalt-ink);
-
-    box-shadow:
-        0 22px 50px rgba(0,0,0,.18),
-        0 0 0 1px rgba(30,55,160,.18);
-}
-  .card img{
-    width:100%;
-    aspect-ratio:4/3;
-    object-fit:contain;
-    background:#fafafa;
-    padding:10px;
-    box-sizing:border-box;
-
-    transition:
-        transform .45s ease,
-        filter .35s ease;
-}
- .card:hover img{
-    transform:scale(1.04);
-    filter:brightness(.96);
-}
-  .card-video{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:
-    transform .45s ease,
-    filter .35s ease;}
- .card:hover .card-video{
-    transform:scale(1.08);
-    filter:brightness(.88);
-}
-  .card .card-body{padding:18px 18px 22px;}
-  .card .num{
-    font-size:13px;font-weight:700;color:var(--color-cobalt-ink);margin:0 0 6px;
-  }
-  .card h3{font-size:18px;font-weight:500;margin:0 0 6px;letter-spacing:-0.02em;}
-  .card p{font-size:14px;color:var(--color-stone);margin:0;line-height:1.5;}
-
-  .view-all{text-align:center;margin-top:32px;}
-
-  /* ---------- Product card hover note ---------- */
- .card-hover-note{
-    position:absolute;inset:0;
-    display:flex;align-items:flex-start;
-    padding:20px 18px;
-    background:rgba(10,10,10,.72);
-    opacity:0;
-    transition:opacity .3s ease;
-    pointer-events:none;
-    z-index:1;
-  }
-  .card:hover .card-hover-note{opacity:1;}
-  .card-hover-note ul{
-    margin:0;padding-left:18px;list-style:disc;
-    color:#fff;font-size:14px;line-height:1.6;
-  }
-  .card-hover-note li{margin-bottom:6px;}
-
-  /* ---------- Products drawer (slide open on "View all products") ---------- */
-/* ---------- Drawer (slide open on "View all products" / "View all resources") ---------- */
- .products-drawer, .resources-drawer{
-    max-height:0;overflow:hidden;opacity:0;
-    margin-top:0;
-    padding-top:16px;
-    transition:max-height .6s cubic-bezier(.16,1,.3,1), opacity .5s ease, margin-top .6s cubic-bezier(.16,1,.3,1);
-  }
-  .products-drawer.is-open, .resources-drawer.is-open{
-    max-height:2400px;opacity:1;margin-top:32px;
-  }
-  .resources-drawer{
-    grid-template-columns:repeat(3, 1fr);
-  }
-  @media (max-width:1060px){
-    .resources-drawer{grid-template-columns:repeat(2, 1fr);}
-  }
-  @media (max-width:760px){
-    .resources-drawer{grid-template-columns:1fr;}
-  }
-  /* ---------- Logo marquee (partners / brands strip) ---------- */
-  .logo-marquee{
-    margin-top:56px;
-    padding-top:40px;
-    border-top:1px solid #ececec;
-  }
-  .logo-marquee p.eyebrow{text-align:center;margin-bottom:24px;}
-  .logo-marquee-track-wrap{
-    overflow:hidden;
-    -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  }
-  .logo-marquee-track{
-    display:flex;
-    align-items:center;
-    gap:56px;
-    width:max-content;
-    animation:logoScroll 28s linear infinite;
-  }
-  .logo-marquee-track .logo-box{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:140px;
-    height:56px;
-    flex-shrink:0;
-  }
-  .logo-marquee-track img{
-    max-height:100%;
-    max-width:100%;
-    width:auto;height:auto;
-    object-fit:contain;
-    transition:transform .2s ease;
-  }
-  .logo-marquee-track .logo-box:hover img{transform:scale(1.06);}
-  @keyframes logoScroll{
-    from{transform:translateX(0);}
-    to{transform:translateX(-50%);}
-  }
-  @media (prefers-reduced-motion: reduce){
-    .logo-marquee-track{animation:none;}
-  }
-
-  /* ---------- Track record gallery ---------- */
-  .gallery{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
-    max-width:1080px;margin:0 auto;
-  }
-  @media (max-width:760px){
-    .gallery{grid-template-columns:repeat(2,1fr);}
-  }
-  .gallery img{
-    width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:var(--radius-lg);
-    filter:grayscale(15%);
-    transition:filter .2s ease, transform .2s ease;
-  }
-  .gallery img:hover{filter:grayscale(0%);transform:scale(1.015);}
-  .gallery-link{display:block;text-align:center;margin-top:28px;font-size:15px;font-weight:500;text-decoration:underline;text-underline-offset:3px;color:var(--color-obsidian);}
-
-  /* ---------- About ---------- */
-  .about-grid{
-    display:grid;grid-template-columns:65fr 35fr;gap:56px;align-items:center;
-  }
-  @media (max-width:900px){
-    .about-grid{grid-template-columns:1fr;gap:36px;}
-  }
-  .about-copy{max-width:640px;}
-
-  .stat-row{
-    display:flex;gap:40px;margin-top:32px;padding-top:24px;flex-wrap:wrap;
-    border-top:1px solid var(--color-ash);
-  }
-  .stat{text-align:left;}
-  .stat .n{font-size:34px;font-weight:500;letter-spacing:-0.03em;color:var(--color-cobalt-ink);}
-  .stat .l{font-size:13px;color:var(--color-stone);margin-top:4px;}
-
-  .founder-quote{margin:28px 0 0;padding-left:22px;border-left:3px solid var(--color-cobalt-ink);}
-  .founder-quote p{font-size:18px;line-height:1.6;letter-spacing:0;color:var(--color-graphite);font-style:italic;margin:0;}
-
-  .quote-track{min-height:108px;display:flex;align-items:flex-start;}
-  .quote-slide{display:none;}
-  .quote-slide.is-active{display:block;animation:quoteFade .45s ease;}
-  @keyframes quoteFade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-
-  .quote-footer{display:flex;align-items:center;gap:14px;margin-top:18px;flex-wrap:wrap;}
-  .quote-nav{
-    flex:0 0 auto;width:32px;height:32px;border-radius:50%;border:1px solid var(--color-ash);
-    background:var(--color-canvas-white);color:var(--color-ink);font-size:17px;line-height:1;
-    cursor:pointer;display:flex;align-items:center;justify-content:center;
-    transition:background .2s ease, border-color .2s ease, transform .2s ease;
-  }
-  .quote-nav:hover{background:var(--color-cobalt-ink);border-color:var(--color-cobalt-ink);color:#fff;transform:scale(1.06);}
-  .quote-tabs{display:flex;gap:8px;flex-wrap:wrap;}
-  .quote-tab{
-    font-family:var(--font-lunar);font-size:13px;font-weight:500;letter-spacing:-0.02em;
-    padding:7px 14px;border-radius:var(--radius-full);border:1px solid var(--color-ash);
-    background:var(--color-canvas-white);color:var(--color-stone);cursor:pointer;
-    transition:background .2s ease, color .2s ease, border-color .2s ease;
-  }
-  .quote-tab:hover{border-color:var(--color-cobalt-ink);color:var(--color-cobalt-ink);}
-  .quote-tab.is-active{background:var(--color-cobalt-ink);border-color:var(--color-cobalt-ink);color:#fff;}
-
-  .about-slideshow{
-    position:relative;aspect-ratio:3/4;border-radius:var(--radius-lg);
-    overflow:hidden;background:var(--color-ash);
-  }
-  .slideshow-track{position:relative;width:100%;height:100%;}
-  .slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease;}
-  .slide.is-active{opacity:1;}
-  .slide img{width:100%;height:100%;object-fit:cover;display:block;}
-  .slide-nav{
-    position:absolute;top:50%;transform:translateY(-50%);
-    width:38px;height:38px;border-radius:50%;border:none;
-    background:rgba(255,255,255,.85);color:var(--color-ink);
-    font-size:20px;line-height:1;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;
-    transition:background .2s ease, transform .2s ease;
-  }
-  .slide-nav:hover{background:#fff;transform:translateY(-50%) scale(1.06);}
-  .slide-nav.prev{left:12px;}
-  .slide-nav.next{right:12px;}
-  .slide-dots{position:absolute;bottom:14px;left:0;right:0;display:flex;justify-content:center;gap:6px;}
-  .slide-dots span{
-    width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.55);
-    cursor:pointer;transition:background .2s ease, transform .2s ease;
-  }
-  .slide-dots span.is-active{background:#fff;transform:scale(1.35);}
-  @media (max-width:900px){.about-slideshow{aspect-ratio:4/3;}}
-
-  /* ---------- Contact ---------- */
- .contact-grid{
-    display:grid;grid-template-columns:1fr 1fr;gap:80px;
-    max-width:1080px;margin:0 auto;align-items:center;
-  }
-  @media (max-width:760px){
-    .contact-grid{grid-template-columns:1fr;text-align:center;}
-    .contact-grid .hero-actions{justify-content:center;}
-  }
-  .contact-info h2{text-align:left;}
-  .contact-info .sub-copy{text-align:left;margin-bottom:24px;}
-  .contact-details{list-style:none;margin:24px 0 28px;padding:0;font-size:14px;color:var(--color-stone);}
-  .contact-details li{margin-bottom:8px;}
-  .contact-details strong{color:var(--color-ink);font-weight:500;}
-  .contact-actions{display:flex;gap:12px;flex-wrap:wrap;}
-  @media (max-width:760px){
-    .contact-info h2, .contact-info .sub-copy{text-align:center;}
-    .contact-actions{justify-content:center;}
-  }
-  .map-ph{
-    border-radius:var(--radius-lg);overflow:hidden;
-    aspect-ratio:4/3;
-    border:2px solid var(--color-ash);
-    cursor:pointer;
-    transition:border-color .25s ease, box-shadow .25s ease, transform .25s ease;
-  }
-  .map-ph:hover{
-    border-color:var(--color-cobalt-ink);
-    box-shadow:0 16px 40px -12px rgba(30,55,160,.35);
-    transform:translateY(-4px);
-  }
-  .map-ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(70%) contrast(1.05);}
-
-  /* ---------- Footer ---------- */
-footer{
-  background:var(--color-obsidian);color:#fff;
-  padding:56px 24px 28px;
-}
-.footer-inner{
-  max-width:var(--page-max-width);margin:0 auto;
-  display:grid;
-  grid-template-columns:1.4fr 1fr 1fr 1fr;
-  gap:40px;
-  align-items:start;
-}
-.footer-brand{display:flex;align-items:center;}
-.footer-logo-img{height:64px;width:auto;object-fit:contain;}
-.footer-col h4{font-size:16px;font-weight:700;color:#fff;margin:0 0 16px;}
-.footer-col p{font-size:14px;color:#ccc;line-height:1.6;margin:0 0 8px;}
-.footer-col a{color:#7ec8ff;transition:color .2s ease;}
-.footer-col a:hover{color:#fff;}
-.footer-link-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14px;}
-.footer-copy{
-  font-size:12px;color:#8a8a8a;
-  max-width:var(--page-max-width);margin:32px auto 0;
-  padding-top:20px;border-top:1px solid rgba(255,255,255,.1);
-}
-@media (max-width:860px){
-  .footer-inner{grid-template-columns:1fr 1fr;}
-}
-@media (max-width:480px){
-  .footer-inner{grid-template-columns:1fr;}
-  .footer-brand{margin-bottom:8px;}
-}
-
-  /* ---------- Reveal on scroll (zoom-in) ---------- */
-  .reveal{
-    opacity:0;
-    transform:scale(.94);
-    transition:opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1);
-  }
-  .reveal.in{opacity:1;transform:scale(1);}
-  @media (prefers-reduced-motion: reduce){
-    .reveal{opacity:1;transform:none;transition:none;}
-  }
-
-  /* ---------- Section-level reveal ---------- */
-  /* Every full-width content band (the "block" sections used on every page)
-     fades and glides in as a whole, slightly slower than inner cards so the
-     section-to-section handoff itself reads as a deliberate transition. */
-  section.block{
-    opacity:0;
-    transform:translateY(64px) scale(.98);
-    transition:opacity 1.1s cubic-bezier(.16,1,.3,1), transform 1.1s cubic-bezier(.16,1,.3,1);
-  }
-  section.block.in{opacity:1;transform:translateY(0) scale(1);}
-  @media (prefers-reduced-motion: reduce){
-    section.block{opacity:1;transform:none;transition:none;}
-  }
-
-  /* ---------- Page transition veil ---------- */
-  /* A solid overlay that covers the viewport on load and on internal
-     navigation, so moving between pages feels like one deliberate motion
-     rather than an instant cut. Timed to be noticeable without feeling slow. */
-  .page-veil{
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    background:var(--color-canvas-white);
-    opacity:1;
-    pointer-events:none;
-    transition:opacity .6s cubic-bezier(.4,0,.2,1);
-  }
-  .page-veil.is-hidden{opacity:0;}
-  .page-veil.is-leaving{opacity:1;pointer-events:all;}
-  @media (prefers-reduced-motion: reduce){
-    .page-veil{transition:none;}
-  }
-
-
-/* ==========================================
-   Premium Floating WhatsApp Widget
-========================================== */
-
-.whatsapp-widget{
-
-    position:fixed;
-    right:25px;
-    bottom:30px;
-
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    text-decoration:none;
-
-    z-index:9999;
-
-}
-
-.whatsapp-text{
-
-    background:#ffffff;
-    color:#1E3AA8;
-
-    padding:12px 18px;
-
-    border-radius:40px;
-
-    font-size:15px;
-    font-weight:600;
-
-    box-shadow:0 12px 30px rgba(0,0,0,.18);
-
-    opacity:0;
-
-    transform:translateX(15px);
-
-    transition:.35s;
-
-    white-space:nowrap;
-
-}
-
-.whatsapp-icon{
-
-    width:68px;
-    height:68px;
-
-    border-radius:50%;
-
-    background:#25D366;
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    color:#ffffff;
-
-    font-size:36px;
-
-    box-shadow:0 12px 30px rgba(0,0,0,.25);
-
-    transition:.35s;
-
-}
-
-.whatsapp-icon i{
-
-    line-height:1;
-
-}
-
-.whatsapp-widget:hover .whatsapp-text{
-
-    opacity:1;
-
-    transform:translateX(0);
-
-}
-
-.whatsapp-widget:hover .whatsapp-icon{
-
-    transform:scale(1.12);
-
-    box-shadow:0 18px 40px rgba(0,0,0,.35);
-
-}
-
-@media(max-width:768px){
-
-    .whatsapp-text{
-
-        display:none;
-
-    }
-
-    .whatsapp-icon{
-
-        width:58px;
-        height:58px;
-
-        font-size:30px;
-
-    }
-
-}
-/* ============================================================ */
-/* SERVICES PAGE                                                */
-/* ============================================================ */
-
-.services-intro{
-  max-width:none;margin:0 0 56px;
-}
-.services-intro p{
-  font-size:19px;line-height:1.65;color:var(--color-graphite);
-  border-left:3px solid var(--color-cobalt-ink);
-  padding-left:20px;
-}
-
-/* ---------- Mind map ---------- */
-.services-mindmap-wrap{
-  margin:0 0 64px;
-  background:var(--color-bone);
-  border:1px solid #ece9e1;
-  border-radius:16px;
-  padding:36px 40px 32px;
-}
-.services-mindmap-wrap .eyebrow{margin-bottom:4px;}
-.services-mindmap-caption{
-  font-size:14px;color:var(--color-stone);margin:0 0 28px;
-}
-.services-mindmap{
-  width:100%;height:auto;display:block;
-  overflow:visible;
-}
-.mm-link{cursor:pointer;}
-.mm-node-rect{
-  transition:transform .18s cubic-bezier(.16,1,.3,1), filter .18s ease;
-  transform-box:fill-box;
-  transform-origin:center;
-}
-.mm-link:hover .mm-node-rect{
-  transform:translateY(-4px) scale(1.03);
-  filter:drop-shadow(0 10px 18px rgba(30,55,160,.25));
-}
-.mm-link:active .mm-node-rect{
-  transform:translateY(-1px) scale(.98);
-}
-.mm-link:focus-visible .mm-node-rect{
-  outline:2px solid var(--color-cobalt-ink);outline-offset:3px;
-}
-.mm-branch-label{
-  font-family:'Inter',sans-serif;font-weight:600;font-size:16px;fill:#fff;
-  pointer-events:none;
-}
-.mm-center-label{
-  font-family:'Inter',sans-serif;font-weight:700;font-size:18px;fill:#fff;
-  pointer-events:none;
-}
-.mm-leaf-text{
-  font-family:'Inter',sans-serif;font-weight:500;font-size:12.5px;fill:var(--color-graphite);
-  pointer-events:none;
-}
-.mm-leaf-pill{fill:#fff;stroke:#e3e0d6;stroke-width:1;}
-.mm-path{fill:none;stroke:#c9cfe8;stroke-width:2;}
-.mm-path-leaf{fill:none;stroke:#e3e0d6;stroke-width:1.5;}
-
-@media (max-width:760px){
-  .services-mindmap-wrap{ padding:28px 20px 24px; }
-}
-@media (max-width:640px){
-  .services-mindmap-wrap{ overflow-x:auto; }
-  .services-mindmap{ min-width:640px; }
-}
-
-/* ---------- Service cards ---------- */
-.services-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:28px;
-  max-width:1100px;margin:0 auto 64px;
-}
-@media (max-width:760px){
-  .services-grid{grid-template-columns:1fr;}
-}
-.service-card{
-  position:relative;
-  overflow:hidden;
-  background:var(--color-canvas-white);
-  border:1px solid #ece9e1;
-  border-radius:14px;
-  padding:30px 30px 32px;
-  display:flex;gap:20px;
-  transition:transform .2s cubic-bezier(.16,1,.3,1), box-shadow .2s ease, border-color .2s ease;
-  scroll-margin-top:110px;
-}
-.service-card::before{
-  content:"";
-  position:absolute;top:0;left:0;width:100%;height:4px;
-  background:var(--color-cobalt-ink);
-  transform:scaleX(0);transform-origin:left;
-  transition:transform .4s ease;
-}
-.service-card:hover::before{transform:scaleX(1);}
-.service-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 16px 32px -12px rgba(0,0,0,.14);
-  border-color:#dcd8cc;
-}
-.service-card:active{
-  transform:translateY(-2px) scale(.99);
-}
-.service-icon{
-  flex:0 0 auto;
-  width:52px;height:52px;border-radius:12px;
-  background:var(--color-cobalt-ink);
-  color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-size:20px;
-  transition:transform .2s ease, background .2s ease;
-}
-.service-card:hover .service-icon{
-  background:var(--color-cobalt-ink-hover);
-  transform:scale(1.08) rotate(-4deg);
-}
-.service-copy{flex:1;min-width:0;}
-.service-copy h3{
-  font-size:19px;font-weight:600;margin:0 0 8px;letter-spacing:-0.01em;
-  color:var(--color-ink);
-}
-.service-copy p{
-  font-size:14.5px;line-height:1.6;color:var(--color-stone);margin:0 0 10px;
-}
-.service-list{
-  list-style:none;margin:0;padding:0;
-}
-.service-list li{
-  font-size:14px;line-height:1.55;color:var(--color-graphite);
-  padding-left:18px;position:relative;margin-bottom:6px;
-}
-.service-list li:last-child{margin-bottom:0;}
-.service-list li::before{
-  content:"";position:absolute;left:0;top:8px;
-  width:6px;height:6px;border-radius:50%;
-  background:var(--color-cobalt-ink);
-}
-
-/* ---------- CTA banner ---------- */
-.services-cta{
-  background:var(--color-ink);
-  border-radius:16px;
-  padding:44px 40px;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:24px;flex-wrap:wrap;
-}
-.services-cta h3{
-  color:#fff;font-size:24px;font-weight:600;margin:0 0 6px;letter-spacing:-0.01em;
-}
-.services-cta p{
-  color:#b8b8b8;font-size:14.5px;margin:0;
-  max-width:46ch;
-}
-.services-cta .btn-primary{
-  background:#fff;color:var(--color-ink);border-color:#fff;
-}
-.services-cta .btn-primary:hover{
-  background:var(--color-bone);box-shadow:0 8px 26px -6px rgba(255,255,255,.25);
-}
-@media (max-width:640px){
-  .services-cta{padding:32px 24px;text-align:center;justify-content:center;}
-  .services-cta > div{width:100%;}
-}
-
-/* ============================================================ */
-/* LINKEDIN UPDATES PAGE                                        */
-/* ============================================================ */
-
-.li-follow-banner{
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
-  gap:20px;
-  background:var(--color-bone);
-  border:1px solid #ececec;
-  border-radius:var(--radius-lg);
-  padding:22px 28px;
-  margin:0 0 40px;
-}
-.li-follow-info{
-  display:flex;align-items:center;gap:16px;
-}
-.li-follow-info i.fa-linkedin{
-  font-size:32px;color:var(--color-cobalt-ink);flex-shrink:0;
-}
-.li-follow-info strong{
-  display:block;font-size:16px;font-weight:600;color:var(--color-ink);
-  letter-spacing:-0.01em;margin-bottom:2px;
-}
-.li-follow-info span{
-  font-size:14px;color:var(--color-stone);line-height:1.5;
-}
-
-.li-posts{
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:24px;
-}
-@media (max-width:992px){
-  .li-posts{grid-template-columns:repeat(2, 1fr);}
-}
-@media (max-width:640px){
-  .li-posts{grid-template-columns:1fr;}
-}
-
-.li-post-card{
-  display:flex;flex-direction:column;
-  background:var(--color-bone);
-  border:1px solid #e2ded2;
-  border-radius:var(--radius-lg);
-  padding:22px;
-  gap:14px;
-  text-decoration:none;
-  color:inherit;
-  transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease, background .35s ease;
-}
-.li-post-card:hover{
-  transform:translateY(-8px);
-  background:#fff;
-  border-color:var(--color-cobalt-ink);
-  box-shadow:0 22px 50px rgba(0,0,0,.14), 0 0 0 1px rgba(30,55,160,.14);
-}
-
-.li-post-head{
-  display:flex;align-items:center;gap:12px;
-}
-.li-post-logo{
-  width:40px;height:40px;border-radius:50%;
-  object-fit:cover;flex-shrink:0;
-  border:1px solid #ececec;
-}
-.li-post-head strong{
-  display:block;font-size:14.5px;font-weight:600;color:var(--color-ink);
-  letter-spacing:-0.01em;
-}
-.li-post-date{
-  font-size:12.5px;color:var(--color-stone);
-}
-
-.li-post-image{
-  width:100%;
-  aspect-ratio:4/3;
-  object-fit:cover;
-  display:block;
-}
-
-.li-post-text{
-  font-size:14.5px;line-height:1.6;color:var(--color-graphite);
-  margin:0;
-}
-
-.li-post-link{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:13.5px;font-weight:600;color:var(--color-cobalt-ink);
-  border-top:1px solid #e2ded2;
-  padding-top:14px;
-  margin-top:auto;
-}
-.li-post-link .arrow{
-  display:inline-block;transition:transform .2s ease;
-}
-.li-post-card:hover .li-post-link .arrow{
-  transform:translateX(3px);
-}
-
-@media (prefers-reduced-motion: reduce){
-  .li-post-card{transition:none;}
-}
-/* ============================================================ */
-/* PROJECT GALLERY — Project Entries                            */
-/* Append this block to style.css                               */
-/* ============================================================ */
-
-.project-entries{
-  display:flex;flex-direction:column;gap:64px;
-  margin-top:8px;
-}
-
-.project-entry{
-  display:grid;
-  grid-template-columns:42% 1fr;
-  gap:48px;
-  align-items:start;
-  padding-bottom:56px;
-  border-bottom:1px solid var(--color-ash);
-}
-.project-entry:last-child{border-bottom:none;padding-bottom:0;}
-
-@media (max-width:860px){
-  .project-entry{grid-template-columns:1fr;gap:24px;}
-}
-
-/* ---------- Media (photo or certificate) ---------- */
-.project-entry-media{
-  border-radius:var(--radius-lg);
-  overflow:hidden;
-  border:1px solid #ececec;
-  background:var(--color-bone);
-}
-.project-entry-media img{
-  width:100%;height:100%;
-  aspect-ratio:4/3;
-  object-fit:cover;
-  display:block;
-  transition:transform .4s ease;
-}
-.project-entry-media:hover img{transform:scale(1.04);}
-
-/* Certificates are document-shaped — show them in full, not cropped */
-.project-entry-media.is-certificate img{
-  aspect-ratio:3/4;
-  object-fit:contain;
-  background:#fff;
-  padding:20px;
-}
-
-/* Optional caption under the image (e.g. "ISO 9001 Certificate", "Site installation, Karachi") */
-.project-entry-media-caption{
-  font-size:12.5px;color:var(--color-stone);
-  padding:10px 14px;
-  border-top:1px solid #ececec;
-  background:#fff;
-}
-
-/* ---------- Content (right column) ---------- */
-.project-entry-content{display:flex;flex-direction:column;}
-
-.project-entry-meta{
-  display:flex;flex-wrap:wrap;align-items:center;gap:10px;
-  margin-bottom:14px;
-}
-.project-entry-tag{
-  font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;
-  color:var(--color-cobalt-ink);background:#eef1fb;
-  border-radius:var(--radius-full);padding:5px 12px;
-}
-.project-entry-date{
-  font-size:13px;color:var(--color-stone);font-weight:500;
-}
-
-.project-entry-company{
-  font-size:24px;font-weight:600;letter-spacing:-0.02em;color:var(--color-ink);
-  margin:0 0 6px;
-}
-.project-entry-title{
-  font-size:15px;color:var(--color-stone);font-weight:500;
-  margin:0 0 20px;
-}
-
-.project-entry-summary{
-  font-size:15px;line-height:1.65;color:var(--color-graphite);
-  margin:0 0 22px;
-}
-
-/* Exact-figures spec strip: quantity, completion date, year, etc. */
-.project-entry-specs{
-  list-style:none;margin:0 0 22px;padding:18px 0;
-  display:grid;grid-template-columns:repeat(2,1fr);gap:14px 24px;
-  border-top:1px solid var(--color-ash);
-  border-bottom:1px solid var(--color-ash);
-}
-.project-entry-specs li{font-size:13.5px;color:var(--color-graphite);}
-.project-entry-specs strong{
-  display:block;font-size:11.5px;font-weight:600;
-  text-transform:uppercase;letter-spacing:.05em;color:var(--color-stone);
-  margin-bottom:4px;
-}
-@media (max-width:480px){
-  .project-entry-specs{grid-template-columns:1fr;}
-}
-
-.project-entry-role{
-  font-size:14px;line-height:1.6;color:var(--color-graphite);margin:0;
-}
-.project-entry-role strong{color:var(--color-ink);font-weight:600;}
-/* ============================================================ */
-/* Request a Quote / Get in Touch modals                        */
-/* ============================================================ */
-body.mc-lock-scroll{overflow:hidden;}
-
-.mc-overlay{
-  position:fixed;inset:0;z-index:1000;
-  background:rgba(20,20,20,.55);
-  display:flex;align-items:center;justify-content:center;
-  padding:24px;
-  opacity:0;visibility:hidden;
-  transition:opacity .25s ease, visibility .25s ease;
-}
-.mc-overlay.is-open{opacity:1;visibility:visible;}
-
-.mc-modal{
-  position:relative;
-  background:var(--color-canvas-white);
-  border-radius:var(--radius-lg);
-  width:100%;max-width:640px;
-  max-height:88vh;overflow-y:auto;
-  padding:36px 36px 30px;
-  box-shadow:0 30px 70px rgba(0,0,0,.28);
-  transform:translateY(16px) scale(.98);
-  transition:transform .25s ease;
-}
-.mc-overlay.is-open .mc-modal{transform:translateY(0) scale(1);}
-.mc-modal-sm{max-width:440px;}
-
-@media (max-width:600px){
-  .mc-modal{padding:28px 20px 24px;border-radius:14px;}
-}
-
-.mc-close{
-  position:absolute;top:16px;right:16px;
-  width:36px;height:36px;border-radius:50%;border:none;
-  background:var(--color-bone);color:var(--color-ink);
-  font-size:22px;line-height:1;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s ease, transform .2s ease;
-}
-.mc-close:hover{background:var(--color-ash);transform:scale(1.06);}
-
-.mc-eyebrow{
-  font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
-  color:var(--color-cobalt-ink);margin:0 0 8px;
-}
-.mc-title{font-size:24px;font-weight:600;letter-spacing:-0.02em;margin:0 0 8px;color:var(--color-ink);}
-.mc-sub{font-size:14px;line-height:1.6;color:var(--color-stone);margin:0 0 24px;max-width:52ch;}
-
-.mc-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-@media (max-width:520px){.mc-row{grid-template-columns:1fr;}}
-
-.mc-field{margin-bottom:18px;}
-.mc-field label{
-  display:block;font-size:13px;font-weight:500;color:var(--color-ink);margin-bottom:6px;
-}
-.mc-field input[type="text"],
-.mc-field input[type="email"],
-.mc-field input[type="tel"],
-.mc-field textarea{
-  width:100%;font-family:var(--font-lunar);font-size:14px;color:var(--color-ink);
-  padding:10px 12px;border:1px solid var(--color-ash);border-radius:8px;
-  background:var(--color-canvas-white);box-sizing:border-box;
-  transition:border-color .2s ease, box-shadow .2s ease;
-}
-.mc-field textarea{resize:vertical;font-family:var(--font-lunar);}
-.mc-field input:focus,
-.mc-field textarea:focus{
-  outline:none;border-color:var(--color-cobalt-ink);
-  box-shadow:0 0 0 3px rgba(30,55,160,.12);
-}
-
-.mc-check-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:10px 16px;margin-top:4px;
-}
-@media (max-width:520px){.mc-check-grid{grid-template-columns:1fr;}}
-.mc-check{
-  display:flex;align-items:center;gap:8px;font-size:14px;color:var(--color-ink);
-  cursor:pointer;user-select:none;
-}
-.mc-check input{width:16px;height:16px;accent-color:var(--color-cobalt-ink);cursor:pointer;flex-shrink:0;}
-
-.mc-error{color:#c0392b;font-size:12.5px;margin:8px 0 0;}
-
-/* Honeypot anti-spam field: present in the DOM for bots to fill in,
-   invisible and unreachable for real visitors (screen readers included). */
-.mc-hp{
-  position:absolute!important;
-  width:1px;height:1px;overflow:hidden;
-  clip:rect(0 0 0 0);clip-path:inset(50%);
-  white-space:nowrap;margin:0;padding:0;border:0;
-}
-
-.mc-captcha-field{
-  background:var(--color-bone);border:1px solid var(--color-ash);border-radius:10px;
-  padding:14px 16px;
-}
-.mc-captcha-field label{margin-bottom:8px;}
-.mc-captcha-field #mcCaptchaQuestion{color:var(--color-cobalt-ink);font-weight:600;}
-.mc-captcha-field input{max-width:120px;}
-.mc-captcha-field .mc-error{margin-top:8px;}
-
-.mc-submit{width:100%;justify-content:center;margin-top:6px;}
-.mc-note{font-size:12.5px;color:var(--color-stone);line-height:1.6;margin:14px 0 0;text-align:center;}
-.mc-note a{color:var(--color-cobalt-ink);}
-.mc-link-btn{
-  background:none;border:none;padding:0;font:inherit;color:var(--color-cobalt-ink);
-  text-decoration:underline;text-underline-offset:2px;cursor:pointer;
-}
-
-.mc-contact-list{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
-.mc-contact-row{
-  display:flex;align-items:center;gap:14px;
-  padding:12px 14px;border:1px solid var(--color-ash);border-radius:10px;
-  color:var(--color-ink);text-decoration:none;
-  transition:border-color .2s ease, background .2s ease;
-}
-a.mc-contact-row:hover{border-color:var(--color-cobalt-ink);background:#f6f8fd;}
-.mc-contact-row-static{cursor:default;}
-.mc-contact-icon{
-  flex-shrink:0;width:38px;height:38px;border-radius:50%;
-  background:var(--color-bone);color:var(--color-cobalt-ink);
-  display:flex;align-items:center;justify-content:center;font-size:16px;
-}
-.mc-contact-text{display:flex;flex-direction:column;gap:2px;font-size:14px;}
-.mc-contact-text strong{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--color-stone);font-weight:600;}
-.mc-full-width{width:100%;justify-content:center;}
-/* ==========================================================
-   LIGHTBOX — click-to-enlarge viewer for project media
-   Handles both images (jpg/png) and PDFs.
-   ========================================================== */
-
-/* Make media blocks that have the lightbox trigger feel clickable */
-.project-entry-media.has-lightbox {
-  cursor: zoom-in;
-  position: relative;
-}
-
-.project-entry-media.has-lightbox img {
-  transition: filter 0.2s ease, transform 0.3s ease;
-}
-
-.project-entry-media.has-lightbox:hover img {
-  filter: brightness(0.85);
-  transform: scale(1.02);
-}
-
-/* "View larger" affordance icon shown on hover */
-.project-entry-view-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 38px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: none;
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  font-size: 15px;
-  cursor: pointer;
-  opacity: 0;
-  transform: translateY(-4px);
-  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
-  pointer-events: none;
-}
-
-.project-entry-media.has-lightbox:hover .project-entry-view-btn,
-.project-entry-media.has-lightbox:focus-within .project-entry-view-btn {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.project-entry-view-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
-
-/* Optional small "View PDF" link/badge that can sit under the caption
-   when a project has a separate certificate/document to show */
-.project-entry-pdf-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 10px;
-  font-size: 13px;
-  font-weight: 500;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  padding: 6px 12px;
-  border-radius: 999px;
-  cursor: pointer;
-  background: rgba(0, 0, 0, 0.03);
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.project-entry-pdf-link:hover {
-  background: rgba(0, 0, 0, 0.07);
-  border-color: rgba(0, 0, 0, 0.3);
-}
-
-.project-entry-pdf-link i {
-  font-size: 13px;
-}
-
-/* ==========================================================
-   Overlay + modal
-   ========================================================== */
-.lightbox-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(10, 10, 12, 0.88);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  padding: 32px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.25s ease;
-}
-
-.lightbox-overlay.is-open {
-  opacity: 1;
-  visibility: visible;
-}
-
-.lightbox-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  max-width: 1200px;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transform: scale(0.96);
-  transition: transform 0.25s ease;
-}
-
-.lightbox-overlay.is-open .lightbox-inner {
-  transform: scale(1);
-}
-
-.lightbox-inner img {
-  max-width: 100%;
-  max-height: 90vh;
-  object-fit: contain;
-  border-radius: 6px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-}
-
-.lightbox-inner iframe {
-  width: min(1100px, 90vw);
-  height: 85vh;
-  border: none;
-  border-radius: 6px;
-  background: #fff;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-}
-
-.lightbox-caption {
-  margin-top: 14px;
-  color: #fff;
-  font-size: 14px;
-  opacity: 0.85;
-  text-align: center;
-}
-
-.lightbox-close {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  width: 42px;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  z-index: 2;
-}
-
-.lightbox-close:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-.lightbox-open-tab {
-  position: absolute;
-  top: -6px;
-  left: -6px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  border: none;
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-  font-size: 13px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.lightbox-open-tab:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-@media (max-width: 640px) {
-  .lightbox-overlay { padding: 16px; }
-  .lightbox-close { top: -44px; right: 0; }
-  .lightbox-open-tab { top: -44px; left: 0; }
-  .lightbox-inner iframe { height: 75vh; }
-}
-.project-entry-pdf-preview{
-    width:100%;
-    height:320px;
-    border:none;
-    border-radius:16px;
-    background:#fff;
-}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Murtaza Corporation — Stainless & Carbon Steel Solutions</title>
+<meta name="description" content="Murtaza Corporation — 25 years of certified stainless and carbon steel sourcing in Karachi. Tubes, pipes, fittings, flanges, valves and structural steel." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+<body>
+<div class="page-veil" aria-hidden="true"></div>
+
+<div class="header-hover-zone" id="headerHoverZone"></div>
+<header>
+  <div class="nav-inner">
+
+    <a href="#top" class="logo" aria-label="Murtaza Corporation home">
+      <img src="Logos/company.png" alt="Murtaza Corporation" class="logo-img" />
+      <span class="logo-name">Murtaza Corporation</span>
+    </a>
+
+    <span class="nav-divider" aria-hidden="true"></span>
+
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li class="nav-item-dropdown">
+          <a href="#products" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Products <span class="nav-caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="pipes.html">Pipes</a></li>
+            <li><a href="fittings.html">Fittings</a></li>
+            <li><a href="valves.html">Valves</a></li>
+            <li><a href="flanges.html">Flanges</a></li>
+            <li><a href="tubes.html">Tubes</a></li>
+            <li><a href="dairy-tubes.html">Dairy tubes &amp; fittings</a></li>
+          </ul>
+        </li>
+        <li class="nav-item-dropdown">
+          <a href="#resources" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Resources <span class="nav-caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="company-profile.html">Company profile</a></li>
+            <li><a href="lor.html">LOR</a></li>
+            <li><a href="mill-test-report.html">Mill Test Report</a></li>
+            <li><a href="services.html">Services</a></li>
+          </ul>
+        </li>
+        <li class="nav-item-dropdown">
+          <a href="#track-record" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Updates <span class="nav-caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="linkedin-updates.html">LinkedIn Updates</a></li>
+            <li><a href="engineering-articles.html">Engineering Articles</a></li>
+            <li><a href="project-gallery.html">Project Gallery</a></li>
+          </ul>
+        </li>
+        <li><a href="#contact" data-open-contact>Contact</a></li>
+      </ul>
+    </nav>
+
+    <span class="nav-divider" aria-hidden="true"></span>
+
+    <div class="nav-actions">
+      <button type="button" class="btn btn-primary btn-sm" data-open-quote>Request a quote <span class="arrow">&rarr;</span></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div id="top"></div>
+
+<section class="hero">
+  <div class="hero-bg">
+    <video autoplay muted loop playsinline preload="auto">
+     <source src="images/office.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-content">
+    <p class="eyebrow">Stainless &amp; carbon steel, supplied right</p>
+    <h1>Your spec, sourced right<br/>and delivered on time.</h1>
+    <p class="sub">Pipes and pipe fittings in stainless and carbon steel, backed by 25 years of certified supply and Mill Test Report traceability on every order — built on relationships that last.</p>
+    <div class="hero-actions">
+
+    <a href="#products" class="btn btn-ghost">
+        View Products
+        <span class="arrow">&rarr;</span>
+    </a>
+
+</div>
+  </div>
+</section>
+
+<div class="trust-bar reveal">
+  <div class="wrap trust-bar-inner">
+    <div class="trust-stat"><div class="n">25</div><div class="l">Years in business</div></div>
+    <div class="trust-stat"><div class="n">500+</div><div class="l">Projects delivered</div></div>
+    <div class="trust-stat"><div class="n">4</div><div class="l">Founding partners, still at the helm</div></div>
+    <div class="trust-stat"><div class="n">MTR</div><div class="l">Certified on every order, no exceptions</div></div>
+  </div>
+</div>
+
+<p class="clients-label">Trusted by teams across steel, textiles, oil &amp; energy</p>
+<div class="clients-wrap reveal" aria-label="Clients we've worked with">
+  <div class="clients-track">
+    <img src="Logos/aisha-340x156.png" alt="Aisha Steel Mills Limited" />
+     <img src="Logos/descon-504x195.png" alt="Descon" />
+    <img src="Logos/dynea-292x198.png" alt="Dynea" />
+    <img src="Logos/hom-1-225x225.png" alt="Habib Oil Mills" />
+    <img src="Logos/lucky-308x308.png" alt="Lucky Textile Mills" />
+    <img src="Logos/milliner-1-300x100.png" alt="Artistic Milliners" />
+  </div>
+</div>
+
+<section class="block band-bone" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <p class="eyebrow">About</p>
+        <h2 class="heading" style="text-align:left;">Four founders. One standard, unmoved for 25 years.</h2>
+        <p class="about-intro">We built this company on a simple idea: promises mean nothing until they're delivered. Every certificate, every shipment, every relationship — still signed off by the same four people who started it.</p>
+        <div class="founder-quote-carousel reveal" id="founderQuotes">
+          <blockquote class="founder-quote">
+            <div class="quote-track">
+              <div class="quote-slide is-active" data-index="0">
+                <p>"My father used to say a good name outlives a good deal. I've spent twenty-five years trying to prove him right — one shipment, one relationship at a time."</p>
+              </div>
+              <div class="quote-slide" data-index="1">
+                <p>"Numbers don't lie, but shortcuts do. Every certificate we hand over is one I'd put my own name to — because I have."</p>
+              </div>
+              <div class="quote-slide" data-index="2">
+                <p>"I've walked more warehouse floors than boardrooms, and that's exactly how I like it. If something isn't right, I want to be the one who catches it, not the client."</p>
+              </div>
+              <div class="quote-slide" data-index="3">
+                <p>"We started small enough that everyone knew everyone. Twenty-five years and a few hundred clients later, I still want it to feel that way."</p>
+              </div>
+            </div>
+            <div class="quote-footer">
+              <button class="quote-nav prev" aria-label="Previous founder" onclick="founderQuoteNav(-1)">&#8249;</button>
+              <div class="quote-tabs" id="founderTabs">
+                <button class="quote-tab is-active" data-index="0" onclick="founderQuoteGoTo(0)">Murtaza</button>
+                <button class="quote-tab" data-index="1" onclick="founderQuoteGoTo(1)">Taher</button>
+                <button class="quote-tab" data-index="2" onclick="founderQuoteGoTo(2)">Khozema</button>
+                <button class="quote-tab" data-index="3" onclick="founderQuoteGoTo(3)">Ghulam Hussain</button>
+              </div>
+              <button class="quote-nav next" aria-label="Next founder" onclick="founderQuoteNav(1)">&#8250;</button>
+            </div>
+          </blockquote>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><div class="n" data-count="25">0</div><div class="l">Years in business</div></div>
+          <div class="stat"><div class="n" data-count="500" data-suffix="+">0</div><div class="l">Projects delivered</div></div>
+          <div class="stat"><div class="n" data-count="4">0</div><div class="l">Founding partners, still at the helm</div></div>
+        </div>
+        <div style="margin-top:28px;">
+         <a href="company-profile.html" class="btn btn-cta"><span class="btn-cta-label">Read our story <span class="arrow">&rarr;</span></span></a>
+        </div>
+      </div>
+
+      <div class="about-slideshow reveal" id="aboutSlideshow" aria-roledescription="carousel" aria-label="Murtaza Corporation through the years">
+        <div class="slideshow-track">
+          <div class="slide is-active"><img src="images/1.jpeg" alt="Team on site at a client warehouse" /></div>
+          <div class="slide"><img src="images/2.jpeg" alt="Founders in earlier years during a visit abroad" /></div>
+          <div class="slide"><img src="images/3.jpeg" alt="Founder working on precision machinery early in his career" /></div>
+          <div class="slide"><img src="images/4.jpg" alt="Valve and pipework installation on site" /></div>
+          <div class="slide"><img src="images/5.jpg" alt="Stainless steel pipe stock at the warehouse" /></div>
+          <div class="slide"><img src="images/36.jpg" alt="Site work at an industrial port project" /></div>
+          <div class="slide"><img src="images/7.jpg" alt="Murtaza Corporation storefront" /></div>
+        </div>
+        <button class="slide-nav prev" aria-label="Previous slide" onclick="aboutSlideshowNav(-1)">&#8249;</button>
+        <button class="slide-nav next" aria-label="Next slide" onclick="aboutSlideshowNav(1)">&#8250;</button>
+        <div class="slide-dots" id="slideDots"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="products">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Products</p>
+      <h2 class="heading">Products that meet your requirement.</h2>
+      <p class="sub-copy">We don't ask you to fit your project around our stock. Tubes, pipes, fittings, flanges, valves, and structural items — sourced from certified global manufacturers and customized to your exact specification, whether that's one fitting or one hundred tons.</p>
+      <p class="standards-line">Manufactured and tested to <strong>ASTM A312 / A106</strong>, <strong>ASME B16.9</strong>, <strong>API 5L</strong>, and <strong>DIN 2448</strong> standards — with <strong>Mill Test Reports</strong> available on request for full material traceability.</p>
+    </div>
+    <div class="grid-3 reveal">
+      <a class="card" href="pipes.html">
+        <img src="images/pipes.jpg" alt="Stainless steel tubes and pipes stacked and sorted by grade" />
+    <div class="card-hover-note">
+  <ul>
+    <li>Available in Seamless & Welded</li>
+    <li>Sizes: 1/4" – 24"</li>
+    <li>Material: Stainless & Carbon Steel</li>
+    <li>Grades: 304, 304L, 316, 316L, A106 Gr. B</li>
+    <li>Thickness: SCH10, SCH40, SCH80 & SCH160</li>
+  </ul>
+</div>
+        <div class="card-body">
+          <h3> Pipes</h3>
+          <p>Certified sizes and grades, imported and local stock.</p>
+        </div>
+      </a>
+      <a class="card" href="fittings.html">
+        <img src="images/fittings.jpg" alt="Forged steel pipe fittings" />
+       <div class="card-hover-note">
+  <ul>
+    <li>Available in Butt Weld, BSP & NPT</li>
+    <li>Sizes: 1/4" – 24"</li>
+    <li>Material: Stainless & Carbon Steel</li>
+    <li>Grades: 304, 316, A105 & A106</li>
+    <li>Pressure: SCH10–SCH80 & 150LB–6000LB</li>
+  </ul>
+</div>
+        <div class="card-body">
+          <h3>Fittings</h3>
+          <p>Elbows, tees, reducers, and couplings, ready to spec.</p>
+        </div>
+      </a>
+      <a class="card" href="valves.html">
+        <img src="images/valves.jpg" alt="Forged steel pipe fittings" />
+    <div class="card-hover-note">
+  <ul>
+    <li>Available in Ball, Gate, Globe, Check & Butterfly</li>
+    <li>Sizes: 1/2" – 20"</li>
+    <li>Material: Stainless, Carbon & Mild Steel</li>
+    <li>Grades: 304, 316, CF8, CF8M & A105</li>
+    <li>Pressure: 150LB–2500LB, PN10–PN40 & 10K</li>
+  </ul>
+</div>
+        <div class="card-body">
+          <h3>Valves</h3>
+          <p>Pressure-rated valves for industrial flow control.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="grid-3 products-drawer" id="productsDrawer">
+      <a class="card" href="flanges.html">
+        <img src="images/S.S-BLIND-FLANGE.jpg" alt="Stainless and mild steel flanges" />
+        <div class="card-hover-note">
+  <ul>
+    <li>Available in Blind, SORF, WNRF & MS Flanges</li>
+    <li>Sizes: 1/2" – 32"</li>
+    <li>Material: Stainless & Mild Steel</li>
+    <li>Grades: 304, 304L, 316, 316L & A105</li>
+    <li>Pressure: Class 150–1500, PN10, PN16 & 10K</li>
+  </ul>
+</div>
+        <div class="card-body">
+          <h3>Flanges</h3>
+          <p>SS/MS flanges in standard and custom pressure ratings.</p>
+        </div>
+      </a>
+      <a class="card" href="tubes.html">
+        <img src="images/1-1024x737.png" alt="Stainless steel tubes" />
+        <div class="card-hover-note">
+  <ul>
+    <li>Available in Round, Square, Rectangle & Boiler Tubes</li>
+    <li>Sizes: 6mm – 4"</li>
+    <li>Material: Stainless & Mild Steel</li>
+    <li>Grades: 304, 304L & 316L</li>
+    <li>Thickness: 1.5mm, 2mm & 3mm</li>
+  </ul>
+</div>
+        <div class="card-body">
+          <h3>Tubes</h3>
+          <p>Instrumentation and general-purpose tubing, certified stock.</p>
+        </div>
+      </a>
+      <a class="card" href="dairy-tubes.html">
+        <img src="images/201510171631065000.jpg" alt="Dairy grade tubes and fittings" />
+<div class="card-hover-note">
+          <ul>
+            <li>Available in Tubes, Fittings & Valves</li>
+            <li>Sizes: 3/4" – 4" (SMS Standard)</li>
+            <li>Material: Stainless Steel 316L</li>
+            <li>Finish: Dairy Polished</li>
+          </ul>
+        </div>        <div class="card-body">
+          <h3>Dairy tubes &amp; fittings</h3>
+          <p>316L food and dairy-grade tubing and fittings.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="view-all reveal">
+      <button type="button" class="btn btn-cta" id="viewAllProductsBtn" aria-expanded="false" aria-controls="productsDrawer">
+        <span class="btn-cta-label" id="viewAllProductsLabel">View all products <span class="arrow">&rarr;</span></span>
+      </button>
+    </div>
+
+    <div class="logo-marquee reveal">
+      <p class="eyebrow">Our Brand Partners</p>
+      <div class="logo-marquee-track-wrap">
+        <div class="logo-marquee-track">
+          <div class="logo-box"><img src="Logos/yuanda.png" alt="Yuanda Valve"></div>
+          <div class="logo-box"><img src="Logos/bothwell.png" alt="Both-Well"></div>
+          <div class="logo-box"><img src="Logos/huike.png" alt="Hebei Huike Steel Pipes Co., Ltd."></div>
+          <div class="logo-box"><img src="Logos/hydrotech.png" alt="Hydrotec"></div>
+          <div class="logo-box"><img src="Logos/bai.jpg" alt="Burhani AQMS Industries"></div>
+          <!-- duplicate set for seamless loop -->
+         <div class="logo-box"><img src="Logos/yuanda.png" alt="Yuanda Valve"></div>
+          <div class="logo-box"><img src="Logos/bothwell.png" alt="Both-Well"></div>
+          <div class="logo-box"><img src="Logos/huike.png" alt="Hebei Huike Steel Pipes Co., Ltd."></div>
+          <div class="logo-box"><img src="Logos/hydrotech.png" alt="Hydrotec"></div>
+          <div class="logo-box"><img src="Logos/bai.jpg" alt="Burhani AQMS Industries"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block band-bone" id="resources">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Resources</p>
+      <h2 class="heading">Everything you need to spec and order.</h2>
+      <p class="sub-copy">Download the company profile and catalog, browse letters of recommendation (LOR) from our clients, or request Mill Test Reports for full material traceability.</p>
+    </div>
+    <div class="grid-3 reveal">
+      <a class="card" href="company-profile.html">
+        
+        <img src="images/company-profile.jpg" alt="Company Profile">
+        <div class="card-body">
+          <p class="num">01.</p>
+          <h3>Company profile</h3>
+          <p>See exactly who you're ordering from — capabilities, certifications, and 25 years of project history in one document.</p>
+          <p class="hint">Click to open &rarr;</p>
+        </div>
+      </a>
+      <a class="card" href="lor.html">
+   
+        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=800&auto=format&fit=crop" alt="Letter of recommendation from a client" />
+        <div class="card-body">
+          <p class="num">02.</p>
+          <h3>LOR</h3>
+          <p>Don't take our word for it. Read what clients who've ordered from us for years actually say.</p>
+          <p class="hint">Click to open &rarr;</p>
+        </div>
+      </a>
+      <a class="card" href="mill-test-report.html">
+      
+        <img src="images/ss-pipe-316-2000x2588.jpg" alt="Mill Test Report for material traceability" />
+        <div class="card-body">
+          <p class="num">03.</p>
+          <h3>Mill Test Report</h3>
+          <p>Full material traceability, certified against ASTM/ASME/API/DIN standards, available for every order.</p>
+          <p class="hint">Click to open &rarr;</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="grid-3 resources-drawer" id="resourcesDrawer">
+      <a class="card" href="services.html">
+       
+        <img src="images/services.jpg" alt="Murtaza Corporation services overview" />
+        <div class="card-body">
+          <p class="num">04.</p>
+          <h3>Services</h3>
+          <p>From sourcing and customization to logistics and after-sales support — see the full range of services we offer.</p>
+          <p class="hint">Click to open &rarr;</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="view-all reveal">
+      <button type="button" class="btn btn-cta" id="viewAllResourcesBtn" aria-expanded="false" aria-controls="resourcesDrawer">
+        <span class="btn-cta-label" id="viewAllResourcesLabel">View all resources <span class="arrow">&rarr;</span></span>
+      </button>
+    </div>
+</section>
+
+<section class="block" id="clients-grid">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Our network</p>
+      <h2 class="heading">Clients we supply to</h2>
+    </div>
+    <div class="clients-collage reveal">
+      <div class="clients-collage-item"><img src="Logos/aisha-340x156.png" alt="Aisha Steel Mills Limited" /></div>
+      <div class="clients-collage-item"><img src="Logos/descon-504x195.png" alt="Descon" /></div>
+      <div class="clients-collage-item"><img src="Logos/dynea-292x198.png" alt="Dynea" /></div>
+      <div class="clients-collage-item"><img src="Logos/hom-1-225x225.png" alt="Habib Oil Mills" /></div>
+      <div class="clients-collage-item"><img src="Logos/lucky-308x308.png" alt="Lucky Textile Mills" /></div>
+      <div class="clients-collage-item"><img src="Logos/milliner-1-300x100.png" alt="Artistic Milliners" /></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="track-record">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Latest Updates</p>
+      <h2 class="heading">Insights, projects, and industry updates.</h2>
+      <p class="sub-copy">
+        Stay connected with our latest engineering knowledge, completed projects,
+        and company updates as we continue supplying industrial piping solutions
+        across Pakistan.
+      </p>
+    </div>
+
+    <div class="updates-grid reveal">
+
+      <!-- LinkedIn Updates -->
+      <article class="update-card">
+        <img src="images/likedin.jpg" alt="LinkedIn Updates">
+
+        <div class="update-content">
+          <span class="update-tag">Company Updates</span>
+
+          <h3>LinkedIn Updates</h3>
+
+          <p>
+            Follow our latest project milestones, factory visits, exhibitions,
+            certifications and company announcements shared directly by our team.
+          </p>
+
+          <a href="linkedin-updates.html" class="btn-cta">View LinkedIn</a>
+        </div>
+      </article>
+
+      <!-- Engineering Articles -->
+      <article class="update-card">
+        <img src="images/articles.jpg" alt="Engineering Articles">
+
+        <div class="update-content">
+          <span class="update-tag">Knowledge Centre</span>
+
+          <h3>Engineering Articles</h3>
+
+          <p>
+            Read practical articles covering stainless steel materials,
+            fabrication techniques, piping systems, corrosion prevention and
+            engineering best practices.
+          </p>
+
+          <a href="engineering-articles.html" class="btn-cta">Read Articles</a>
+        </div>
+      </article>
+
+      <!-- Project Gallery -->
+      <article class="update-card">
+        <img src="images/projects.jpg" alt="Project Gallery">
+
+        <div class="update-content">
+          <span class="update-tag">Completed Projects</span>
+
+          <h3>Project Gallery</h3>
+
+          <p>
+            Browse our supplied materials, fabrication work, industrial
+            installations and successful client deliveries from recent projects.
+          </p>
+
+          <a href="project-gallery.html" class="btn-cta">View Gallery</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <p class="eyebrow">Contact</p>
+        <h2 class="heading">Talk to our sales team today.</h2>
+        <p class="sub-copy">Karachi shop and Korangi warehouse. Whether it's a quote, a purchase order, or an accounts query — you'll reach the right person directly, not a call center.</p>
+        <ul class="contact-details">
+          <li><strong>Shop:</strong> James Terrace Road, Karachi</li>
+          <li><strong>Warehouse:</strong> Korangi Industrial Area</li>
+          <li><strong>Hours:</strong> Monday – Saturday, 9am – 6pm</li>
+        </ul>
+       <div class="contact-social-row">
+          <a href="https://www.linkedin.com/company/murtaza-corporation/posts/?feedView=all" class="social-icon" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/murtazacorporation/" class="social-icon" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/people/Murtaza-Corporation/61582645033485/" class="social-icon" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+         <a href="tel:+923343791852" class="social-icon" aria-label="Call via WhatsApp number"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div class="contact-actions">
+          <button type="button" class="btn btn-cta" data-open-contact><span class="btn-cta-label">Get in touch <span class="arrow">&rarr;</span></span></button>
+        </div>
+      </div>
+     <div class="map-ph reveal" style="position:relative;">
+        <iframe
+          src="https://www.google.com/maps?q=24.847867,67.1008223&z=17&output=embed"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Murtaza Corporation location"></iframe>
+        <a href="https://www.google.com/maps/place/Murtaza+Corporation/@24.8456792,67.0960364,17z/data=!3m1!4b1!4m6!3m5!1s0x3eb33e1b45682783:0xda1894e48be36e36!8m2!3d24.8456792!4d67.0986167!16s%2Fg%2F11b6xd4xmj?entry=ttu&g_ep=EgoyMDI2MDcxNC4wIKXMDSoASAFQAw%3D%3D"
+           target="_blank" rel="noopener"
+           aria-label="Open Murtaza Corporation location in Google Maps"
+           style="position:absolute; inset:0; display:block; z-index:2;"></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="Logos/company.png" alt="Murtaza Corporation" class="footer-logo-img" />
+    </div>
+
+    <div class="footer-col">
+      <h4>Address</h4>
+      <p>516/517, Sector 6-A, Mehran Town, Korangi Industrial Area, Karachi - 74900, Pakistan</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contacts</h4>
+      <p>Email: <a href="mailto:sales@murtazacorporation.com.pk">sales@murtazacorporation.com.pk</a></p>
+      <p>Phone: <a href="tel:+922135141451">+92 (21) 35141451</a></p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Links</h4>
+      <ul class="footer-link-list">
+        <li><a href="http://www.wermac.org/" target="_blank" rel="noopener">Wermac</a></li>
+        <li><a href="http://www.huikepipe.com/en/" target="_blank" rel="noopener">Hebei Huike</a></li>
+        <li><a href="http://www.yuandavalves.com/brand.html" target="_blank" rel="noopener">Yuanda Valve</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 Murtaza Corporation. All rights reserved.</div>
+</footer>
+
+<script src="script.js" defer></script>
+<script src="calculator-widget.js" defer></script>
+<script src="contact-widgets.js" defer></script>
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/923343791852"
+   class="whatsapp-widget"
+   target="_blank"
+   aria-label="Chat on WhatsApp">
+
+    <span class="whatsapp-text">
+        Chat with us
+    </span>
+
+    <div class="whatsapp-icon">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+</a>
+</body>
+</html>
