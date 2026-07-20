@@ -27,7 +27,7 @@
     --radius-lg:8px;
     --radius-full:9999px;
 
-    --page-max-width:1280px;
+    --page-max-width:1440px;
     --section-gap:80px;
   }
 
@@ -382,6 +382,15 @@
   }
 
   /* ---------- Client strip / marquee ---------- */
+  .clients-wrap-heading{
+    text-align:center;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--color-stone);
+    margin:0 0 4px;
+  }
   .clients-wrap{
     padding:36px 0;
     -webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
@@ -400,7 +409,6 @@
     padding-right:64px;
     flex-shrink:0;
   }
-  .clients-wrap:hover .clients-track{animation-play-state:paused;}
   .clients-track .logo-box{
     display:flex;
     align-items:center;
@@ -642,9 +650,7 @@
   .card img{
     width:100%;
     aspect-ratio:4/3;
-    object-fit:contain;
-    background:#fafafa;
-    padding:10px;
+    object-fit:cover;
     box-sizing:border-box;
 
     transition:
@@ -709,56 +715,16 @@
   @media (max-width:760px){
     .resources-drawer{grid-template-columns:1fr;}
   }
-  /* ---------- Logo marquee (partners / brands strip) ---------- */
-  .logo-marquee{
+  /* ---------- Partners strip (rebuilt on the same proven mechanics
+     as the Our Clients carousel above, to avoid the old marquee's
+     seamless-loop bug) ---------- */
+  .partners-wrap{
     margin-top:56px;
     padding-top:40px;
     border-top:1px solid #ececec;
   }
-  .logo-marquee p.eyebrow{text-align:center;margin-bottom:24px;}
-  .logo-marquee-track-wrap{
-    overflow:hidden;
-    -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  }
-  .logo-marquee-track{
-    display:flex;
-    align-items:center;
-    width:max-content;
-    will-change:transform;
-    animation:logoScroll 28s linear infinite;
-  }
-  .logo-marquee-set{
-    display:flex;align-items:center;gap:56px;
-    padding-right:56px;
-    flex-shrink:0;
-  }
-  .logo-marquee-track .logo-box{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:140px;
-    height:56px;
-    flex-shrink:0;
-  }
-  .logo-marquee-track img{
-    max-height:100%;
-    max-width:100%;
-    width:auto;height:auto;
-    object-fit:contain;
-    transition:transform .2s ease;
-  }
-  .logo-marquee-track .logo-box:hover img{transform:scale(1.06);}
-  /* Two self-contained .logo-marquee-set wrappers, each with its own
-     trailing gap, so -50% always lands exactly on a full set boundary
-     no matter how many logos are added. */
-  @keyframes logoScroll{
-    from{transform:translateX(0);}
-    to{transform:translateX(-50%);}
-  }
-  @media (prefers-reduced-motion: reduce){
-    .logo-marquee-track{animation:none;}
-  }
+  .partners-wrap p.eyebrow{text-align:center;margin-bottom:24px;}
+  .partners-wrap .clients-wrap{padding:12px 0;}
 
   /* ---------- Track record gallery ---------- */
   .gallery{
