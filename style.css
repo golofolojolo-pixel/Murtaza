@@ -385,10 +385,18 @@
     mask-image:linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
     overflow:hidden;
   }
+.clients-label{
+    text-align:center;
+    font-size:13px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--color-stone);
+    margin:0 0 4px;
+}
+
   .clients-track{
     display:flex;align-items:center;gap:72px;width:max-content;
-    animation:marquee-ltr 42s linear infinite;
-  }
+animation:marquee-ltr 20s linear infinite;  }
   .clients-wrap:hover .clients-track{animation-play-state:paused;}
   .clients-track img{
     height:34px;width:auto;object-fit:contain;
@@ -403,6 +411,14 @@
   @media (prefers-reduced-motion: reduce){
     .clients-track{animation:none;}
   }
+.clients-label{
+    text-align:center;
+    font-size:13px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--color-stone);
+    margin:0 0 4px;
+}
 
   /* ---------- Sections ---------- */
   /* section.block padding + border now defined above, near button styles */
