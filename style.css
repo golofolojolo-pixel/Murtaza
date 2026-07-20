@@ -330,7 +330,7 @@
   }
   .hero-content{
     position:relative;z-index:1;max-width:520px;
-    padding:48px 24px;color:#fff;
+    padding:48px clamp(24px, 5vw, 64px);color:#fff;
     margin-left:0;margin-right:auto;
   }
   .hero-content p.eyebrow{
@@ -353,7 +353,6 @@
   .hero .btn-ghost:hover{background:#fff;color:var(--color-obsidian);}
 
   @media (min-width:640px){
-    .hero-content{padding-left:48px;}
     .hero-content h1{font-size:52px;}
   }
   @media (max-width:640px){
