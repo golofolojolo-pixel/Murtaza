@@ -542,6 +542,87 @@
   }
   #page-top .sub-copy{font-size:18px;line-height:1.65;max-width:62ch;}
 
+  /* ============================================================
+     PRODUCT & MTR DETAIL PAGES — shared component system
+     Used by: pipes, fittings, flanges, tubes, valves, dairy-tubes,
+     mill-test-report. Previously each page redefined this block
+     locally (and had drifted — e.g. .spec-pill's margin-top was 8px
+     on four pages and 16px on two). Single source now; every detail
+     page inherits identical spec grids, type cards and tile grids.
+     ============================================================ */
+  #product-top .section-head, #mtr-top .section-head{
+    text-align:left;margin:0 0 40px;max-width:none;
+  }
+  #product-top p, #mtr-top p{text-align:left;}
+
+  .spec-item{
+    background:#fff;border:1px solid #ececec;border-radius:10px;padding:14px 16px;
+  }
+  .spec-label{
+    display:block;font-size:12px;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--color-stone);margin-bottom:4px;
+  }
+  .spec-value{color:var(--color-ink);font-weight:500;font-size:15px;}
+
+  .type-card{position:relative;padding:4px 18px 4px 54px;}
+  .type-badge{
+    position:absolute;left:0;top:2px;width:32px;height:32px;border-radius:50%;
+    background:var(--color-cobalt-ink);color:#fff;font-size:14px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .spec-pill{
+    display:inline-block;margin-top:8px;padding:3px 10px;border-radius:20px;
+    background:#eaf0fe;color:var(--color-cobalt-ink);font-size:12px;font-weight:600;
+    letter-spacing:.01em;
+  }
+  .stock-list{list-style:none;margin:14px 0 0;padding:0;}
+  .stock-list li{
+    position:relative;padding-left:26px;margin-bottom:14px;color:var(--color-ink);font-size:16px;
+  }
+  .stock-list li::before{
+    content:"✓";position:absolute;left:0;top:0;color:var(--color-cobalt-ink);font-weight:700;
+  }
+  @media (max-width:640px){
+    .type-card{padding-left:46px;}
+    .type-badge{width:28px;height:28px;font-size:13px;}
+  }
+
+  /* Product/material photo cards reuse the generic .card component but
+     don't want its "View specification →" hover badge (that belongs to
+     the product-family grid on the Products section, not a static photo). */
+  .product-photo-card{transition:transform var(--dur-component) var(--ease-standard), box-shadow var(--dur-component) var(--ease-standard);}
+  .product-photo-card:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,0,0,.08);}
+  .product-photo-card::after, .report-card::after{content:none !important;}
+
+  /* Small square tile grid (individual fitting/valve/tube shapes with a
+     photo + label). One canonical component shared by every page that
+     needs it, whatever it's called in that page's markup. */
+  .fitting-grid, .valve-grid, .product-grid{
+    display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:16px;
+    margin-top:18px;justify-items:center;
+  }
+  .fitting-tile, .valve-tile, .product-tile{
+    background:#fff;border:1px solid #ececec;border-radius:10px;overflow:hidden;
+    text-align:center;width:150px;height:auto;
+    transition:transform var(--dur-component) var(--ease-standard), box-shadow var(--dur-component) var(--ease-standard);
+  }
+  .fitting-tile:hover, .valve-tile:hover, .product-tile:hover{
+    transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.08);
+  }
+  .fitting-tile img, .valve-tile img, .product-tile img{
+    width:150px;height:150px;object-fit:contain;object-position:center;
+    background:#fafafa;display:block;padding:10px;box-sizing:border-box;
+  }
+  .fitting-tile span, .valve-tile span, .product-tile span{
+    display:block;padding:8px 6px;font-size:13px;font-weight:500;color:var(--color-ink);
+  }
+  @media (max-width:900px){
+    .fitting-grid, .valve-grid, .product-grid{grid-template-columns:repeat(3, minmax(0,1fr));}
+  }
+  @media (max-width:640px){
+    .fitting-grid, .valve-grid, .product-grid{grid-template-columns:repeat(2, minmax(0,1fr));}
+  }
+
   /* ---------- Clickable-card affordance (Resources cards) ---------- */
   #resources .card{
     cursor:pointer;position:relative;transition:transform .18s ease, box-shadow .18s ease;
