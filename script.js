@@ -93,9 +93,30 @@ document.addEventListener('click', (e) => {
 });
 
 // Scroll reveal — cards/grids
+// Siblings that share a direct parent (a card grid, a services list, etc.)
+// get an incremental transition-delay so the row cascades in rather than
+// arriving as one flat block. Delay is capped so a long list never makes
+// the last item feel like it's waiting too long.
+const STAGGER_STEP_MS = 70;
+const STAGGER_MAX_MS = 420;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function staggerDelayFor(el) {
+  if (reducedMotion) return 0;
+  const siblings = [...(el.parentElement ? el.parentElement.children : [])]
+    .filter(sib => sib.classList && sib.classList.contains('reveal'));
+  const index = siblings.indexOf(el);
+  return Math.min(Math.max(index, 0) * STAGGER_STEP_MS, STAGGER_MAX_MS);
+}
+
 const revealIO = new IntersectionObserver((entries) => {
   entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); }
+    if (e.isIntersecting) {
+      const delay = staggerDelayFor(e.target);
+      if (delay) e.target.style.transitionDelay = delay + 'ms';
+      e.target.classList.add('in');
+      revealIO.unobserve(e.target);
+    }
   });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
@@ -118,7 +139,7 @@ document.querySelectorAll('section.block').forEach(el => sectionRevealIO.observe
 (function () {
   const veil = document.querySelector('.page-veil');
   if (!veil) return;
-  const DURATION = 600; // keep in sync with the .page-veil transition in style.css
+  const DURATION = 800; // keep in sync with --dur-page in style.css
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (reduced) {
