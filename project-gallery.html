@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Project Gallery — Murtaza Corporation</title>
+<meta name="description" content="Supplied materials, fabrication work, industrial installations and successful client deliveries from Murtaza Corporation." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style>
+  /* Resized preview images — click opens the full document in an
+     in-page overlay window (no new tab, no external lightbox JS). */
+  .project-entry-media {
+    display: block;
+    aspect-ratio: 3/4;
+    max-height: 320px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+  }
+  .project-entry-media:hover {
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+  .project-entry-pdf-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Full-view overlay window — same scrim tone and circular close badge
+     as the site's canonical .lightbox-overlay / .lightbox-close
+     (script.js), so every full-size document viewer reads as one
+     component regardless of which page implements it. */
+  .doc-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 10, 12, 0.88);
+    padding: 40px 20px;
+  }
+  .doc-lightbox[hidden] { display: none; }
+  .doc-lightbox-inner {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .doc-lightbox-inner img {
+    max-width: 90vw;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+  .doc-lightbox-caption {
+    color: #fff;
+    font-size: 0.9rem;
+    margin-top: 12px;
+    text-align: center;
+  }
+  .doc-lightbox-close {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background var(--dur-hover) var(--ease-standard);
+    z-index: 2;
+  }
+  .doc-lightbox-close:hover { background: rgba(255, 255, 255, 0.25); }
+  @media (max-width: 640px) {
+    .doc-lightbox-close { top: -44px; right: 0; }
+  }
+</style>
+
+</head>
+<body>
+<div class="page-veil" aria-hidden="true"></div>
+
+<div class="header-hover-zone" id="headerHoverZone"></div>
+<header>
+  <div class="nav-inner">
+
+    <a href="index.html#top" class="logo" aria-label="Murtaza Corporation home">
+      <img src="Logos/company.png" alt="Murtaza Corporation" class="logo-img" />
+      <span class="logo-name">Murtaza Corporation</span>
+    </a>
+
+    <span class="nav-divider" aria-hidden="true"></span>
+
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#about">About</a></li>
+        <li class="nav-item-dropdown">
+          <a href="index.html#products" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Products <span class="nav-caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="pipes.html">Pipes</a></li>
+            <li><a href="fittings.html">Fittings</a></li>
+            <li><a href="valves.html">Valves</a></li>
+            <li><a href="flanges.html">Flanges</a></li>
+            <li><a href="tubes.html">Tubes</a></li>
+            <li><a href="dairy-tubes.html">Dairy tubes &amp; fittings</a></li>
+          </ul>
+        </li>
+        <li class="nav-item-dropdown">
+          <a href="index.html#resources" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Resources <span class="nav-caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="company-profile.html">Company profile</a></li>
+            <li><a href="lor.html">LOR</a></li>
+            <li><a href="mill-test-report.html">Mill Test Report</a></li>
+            <li><a href="services.html">Services</a></li>
+          </ul>
+        </li>
+        <li class="nav-item-dropdown">
+          <a href="index.html#track-record" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Updates <span class="nav-caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="linkedin-updates.html">LinkedIn Updates</a></li>
+            <li><a href="engineering-articles.html">Engineering Articles</a></li>
+            <li><a href="project-gallery.html">Project Gallery</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#contact" data-open-contact>Contact</a></li>
+      </ul>
+    </nav>
+
+    <span class="nav-divider" aria-hidden="true"></span>
+
+    <div class="nav-actions">
+      <button type="button" class="btn btn-primary btn-sm" data-open-quote>Request a quote <span class="arrow">&rarr;</span></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div id="top"></div>
+
+<section class="block" id="page-top">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow"><a href="index.html#track-record" style="color:inherit;">Updates</a> / Project Gallery</p>
+      <h2 class="heading">Project Gallery</h2>
+      <p class="sub-copy">A record of supplied materials, fabrication work, industrial installations and completed client deliveries — with the exact scope, timeline and role Murtaza Corporation played in each.</p>
+    </div>
+
+    <div class="project-entries">
+<!-- ===== 1992 — HUB POWER PROJECT ===== -->
+<div class="project-entry reveal">
+
+  <div class="project-entry-media"
+       data-img-src="projects/HUB POWER_page-0001.jpg"
+       role="button" tabindex="0"
+       aria-label="View larger: Hub Power Project - Letter of Appreciation">
+    <img src="projects/HUB POWER_page-0001.jpg"
+         alt="Hub Power Project - Letter of Appreciation preview"
+         class="project-entry-pdf-preview"
+         loading="lazy" />
+    <p class="project-entry-media-caption">Official Letter of Appreciation</p>
+  </div>
+
+  <div class="project-entry-content">
+
+    <div class="project-entry-meta">
+      <span class="project-entry-tag">Ishikawajima Harima Heavy Industries</span>
+      <span class="project-entry-date">1992</span>
+    </div>
+
+    <h3 class="project-entry-company">Hub Power Project — Pakistan</h3>
+    <p class="project-entry-title">Power Generation</p>
+
+    <p class="project-entry-summary">
+      The Hub Power Project was one of Pakistan's landmark independent power generation projects and among the largest privately financed power stations in South Asia. Murtaza Corporation supplied industrial piping materials to Ishikawajima Harima Heavy Industries (IHI), earning an official Letter of Appreciation for reliable service and timely deliveries.
+    </p>
+
+    <ul class="project-entry-specs">
+      <li><strong>Year Awarded</strong>1992</li>
+      <li><strong>Sector</strong>Private Sector Power Generation</li>
+      <li><strong>Contractor</strong>Ishikawajima Harima Heavy Industries (IHI)</li>
+      <li><strong>Recognition</strong>Official Letter of Appreciation</li>
+    </ul>
+
+    <p class="project-entry-role">
+      <strong>Our role:</strong> Major supplier of industrial pipes and fittings for the Hub Power Project, supporting construction through dependable material supply and earning formal recognition from the project contractor.
+    </p>
+
+  </div>
+</div>
+
+<!-- ===== 1997 — AES LAL PIR POWER PROJECT ===== -->
+<div class="project-entry reveal">
+
+  <div class="project-entry-media"
+       data-img-src="projects/LAL PIR OIL_page-0001.jpg"
+       role="button" tabindex="0"
+       aria-label="View larger: AES Lal Pir Power Project - Letter of Appreciation">
+    <img src="projects/LAL PIR OIL_page-0001.jpg"
+         alt="AES Lal Pir Power Project - Letter of Appreciation preview"
+         class="project-entry-pdf-preview"
+         loading="lazy" />
+    <p class="project-entry-media-caption">Official Letter of Appreciation</p>
+  </div>
+
+  <div class="project-entry-content">
+
+    <div class="project-entry-meta">
+      <span class="project-entry-tag">Nichimen Corporation</span>
+      <span class="project-entry-date">1997</span>
+    </div>
+
+    <h3 class="project-entry-company">AES Lal Pir Power Project — Pakistan</h3>
+    <p class="project-entry-title">Independent Power Generation</p>
+
+    <p class="project-entry-summary">
+      Murtaza Corporation supplied industrial piping materials for the AES Lal Pir 2 × 362 MW Oil Fired Power Plant under Nichimen Corporation. Through quality products and dependable deliveries, the company contributed to the successful execution of this major independent power generation project and received an official Letter of Appreciation.
+    </p>
+
+    <ul class="project-entry-specs">
+      <li><strong>Year</strong>1997</li>
+      <li><strong>Client</strong>Nichimen Corporation</li>
+      <li><strong>Project</strong>AES Lal Pir 2 × 362 MW Power Plant</li>
+      <li><strong>Sector</strong>Power Generation</li>
+    </ul>
+
+    <p class="project-entry-role">
+      <strong>Our role:</strong> Supplier of industrial pipes and fittings supporting project construction through timely delivery and quality hardware solutions.
+    </p>
+
+  </div>
+</div>
+
+<!-- ===== 1999 — PAK-AMERICAN FERTILISERS EXTENSION ===== -->
+<div class="project-entry reveal">
+
+  <div class="project-entry-media"
+       data-img-src="documents/thumbnails/pafl-1999.jpg"
+       role="button" tabindex="0"
+       aria-label="View larger: Extension of Pak-American Fertilisers Ltd - Letter of Appreciation">
+    <img src="documents/thumbnails/pafl-1999.jpg"
+         alt="Extension of Pak-American Fertilisers Ltd - Letter of Appreciation preview"
+         class="project-entry-pdf-preview"
+         loading="lazy" />
+    <p class="project-entry-media-caption">Official Letter of Appreciation</p>
+  </div>
+
+  <div class="project-entry-content">
+
+    <div class="project-entry-meta">
+      <span class="project-entry-tag">Toyo Engineering</span>
+      <span class="project-entry-date">1999</span>
+    </div>
+
+    <h3 class="project-entry-company">Extension of Pak-American Fertilisers Ltd — Pakistan</h3>
+    <p class="project-entry-title">Fertiliser Manufacturing</p>
+
+    <p class="project-entry-summary">
+      Pak-American Fertilisers Limited (PAFL), Pakistan's first fertiliser manufacturing concern established in 1959, operates a plant at Mianwali producing 1,050 metric tons of urea per day. The 1999 expansion, designed by Toyo Engineering Japan, strengthened one of Pakistan's leading fertiliser production facilities.
+    </p>
+
+    <ul class="project-entry-specs">
+      <li><strong>Production Capacity</strong>1,050 metric tons urea/day</li>
+      <li><strong>Year Commissioned</strong>1999</li>
+      <li><strong>Client</strong>Pak-American Fertilisers Ltd (NFC)</li>
+      <li><strong>Designed By</strong>Toyo Engineering, Japan</li>
+    </ul>
+
+    <p class="project-entry-role">
+      <strong>Our role:</strong> Major hardware supplier for the plant extension, establishing a long-term relationship with Pak-American Fertilisers Limited.
+    </p>
+
+  </div>
+</div>
+
+<!-- ===== 1998 — HABIBULLAH COASTAL POWER PROJECT ===== -->
+<div class="project-entry reveal">
+
+  <div class="project-entry-media"
+       data-img-src="projects/Habibuallah coastal power_page-0001.jpg"
+       role="button" tabindex="0"
+       aria-label="View larger: Habibullah Coastal Power Project - Letter of Appreciation">
+    <img src="projects/Habibuallah coastal power_page-0001.jpg"
+         alt="Habibullah Coastal Power Project - Letter of Appreciation preview"
+         class="project-entry-pdf-preview"
+         loading="lazy" />
+    <p class="project-entry-media-caption">Official Letter of Appreciation</p>
+  </div>
+
+  <div class="project-entry-content">
+
+    <div class="project-entry-meta">
+      <span class="project-entry-tag">Babcock &amp; Wilcox Gama</span>
+      <span class="project-entry-date">1998</span>
+    </div>
+
+    <h3 class="project-entry-company">Habibullah Coastal Power Project — Pakistan</h3>
+    <p class="project-entry-title">Power Generation</p>
+
+    <p class="project-entry-summary">
+      Murtaza Corporation supplied industrial piping products for the Habibullah Coastal Power Project executed by Babcock &amp; Wilcox Gama. The successful execution and dependable supply of materials were formally acknowledged through an official Letter of Appreciation.
+    </p>
+
+    <ul class="project-entry-specs">
+      <li><strong>Year</strong>1998</li>
+      <li><strong>Client</strong>Babcock &amp; Wilcox Gama</li>
+      <li><strong>Project</strong>Habibullah Coastal Power Project</li>
+      <li><strong>Sector</strong>Power Generation</li>
+    </ul>
+
+    <p class="project-entry-role">
+      <strong>Our role:</strong> Supplier of industrial pipes and fittings, providing dependable hardware solutions throughout project execution.
+    </p>
+
+  </div>
+</div>
+
+<!-- ===== 2000 — PARCO OIL REFINERY & PORT QASIM POWER PROJECT ===== -->
+<div class="project-entry reveal">
+
+  <div class="project-entry-media"
+       data-img-src="documents/thumbnails/parco-2000.jpg"
+       role="button" tabindex="0"
+       aria-label="View larger: PARCO Oil Refinery &amp; Port Qasim Power Project - Letter of Appreciation">
+    <img src="documents/thumbnails/parco-2000.jpg"
+         alt="PARCO Oil Refinery &amp; Port Qasim Power Project - Letter of Appreciation preview"
+         class="project-entry-pdf-preview"
+         loading="lazy" />
+    <p class="project-entry-media-caption">Official Letter of Appreciation</p>
+  </div>
+
+  <div class="project-entry-content">
+
+    <div class="project-entry-meta">
+      <span class="project-entry-tag">Marubeni Corporation</span>
+      <span class="project-entry-date">2000</span>
+    </div>
+
+    <h3 class="project-entry-company">PARCO Oil Refinery &amp; Port Qasim Power Project</h3>
+    <p class="project-entry-title">Oil Refining &amp; Power Generation</p>
+
+    <p class="project-entry-summary">
+      PARCO is one of Pakistan's leading integrated energy companies and a joint venture between the Governments of Pakistan and Abu Dhabi. Murtaza Corporation participated as a major supplier of industrial piping products for this landmark refinery and power generation project.
+    </p>
+
+    <ul class="project-entry-specs">
+      <li><strong>Year</strong>2000</li>
+      <li><strong>Client</strong>Pak-Arab Refinery Limited (PARCO)</li>
+      <li><strong>Structure</strong>Joint Venture – Governments of Pakistan &amp; Abu Dhabi</li>
+      <li><strong>Sector</strong>Oil Refining &amp; Power Generation</li>
+    </ul>
+
+    <p class="project-entry-role">
+      <strong>Our role:</strong> Major supplier of industrial pipes and fittings supporting refinery and power generation facilities, strengthening a long-term relationship with PARCO.
+    </p>
+
+  </div>
+</div>
+
+</div>
+    <div class="services-cta reveal" style="margin-top:64px;">
+      <div>
+        <h3>Have a project in mind?</h3>
+        <p>Every delivery here reflects our commitment to quality, exact specification, and on-time execution. We're looking to take on more projects like these.</p>
+      </div>
+      <button type="button" class="btn btn-primary" data-open-quote>Request a quote <span class="arrow">&rarr;</span></button>
+    </div>
+
+    <div class="view-all reveal">
+      <a href="index.html#track-record" class="btn btn-ghost">
+        &larr; Back to all updates
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="Logos/company.png" alt="Murtaza Corporation" class="footer-logo-img" />
+    </div>
+
+    <div class="footer-col">
+      <h4>Address</h4>
+      <p>516/517, Sector 6-A, Mehran Town, Korangi Industrial Area, Karachi - 74900, Pakistan</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contacts</h4>
+      <p>Email: <a href="mailto:sales@murtazacorporation.com.pk">sales@murtazacorporation.com.pk</a></p>
+      <p>Phone: <a href="tel:+922135141451">+92 (21) 35141451</a></p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Links</h4>
+      <ul class="footer-link-list">
+        <li><a href="http://www.wermac.org/" target="_blank" rel="noopener">Wermac</a></li>
+        <li><a href="http://www.huikepipe.com/en/" target="_blank" rel="noopener">Hebei Huike</a></li>
+        <li><a href="http://www.yuandavalves.com/brand.html" target="_blank" rel="noopener">Yuanda Valve</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 Murtaza Corporation. All rights reserved.</div>
+</footer>
+
+<!-- Full-view overlay window for viewing a document at large size -->
+<div class="doc-lightbox" id="docLightbox" hidden>
+  <div class="doc-lightbox-inner">
+    <button type="button" class="doc-lightbox-close" id="docLightboxClose" aria-label="Close">&times;</button>
+    <div id="docLightboxContent"></div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const lightbox = document.getElementById('docLightbox');
+    const content = document.getElementById('docLightboxContent');
+    const closeBtn = document.getElementById('docLightboxClose');
+
+    function openLightbox(src, alt) {
+      content.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = alt || '';
+      content.appendChild(img);
+      if (alt) {
+        const caption = document.createElement('p');
+        caption.className = 'doc-lightbox-caption';
+        caption.textContent = alt;
+        content.appendChild(caption);
+      }
+      lightbox.hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.hidden = true;
+      content.innerHTML = '';
+      document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+    });
+
+    document.querySelectorAll('[data-img-src]').forEach((el) => {
+      const open = () => openLightbox(el.getAttribute('data-img-src'), el.querySelector('img')?.alt);
+      el.addEventListener('click', open);
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+      });
+    });
+  })();
+</script>
+<script src="script.js" defer></script>
+<script src="calculator-widget.js" defer></script>
+<script src="contact-widgets.js" defer></script>
+<a href="https://wa.me/923343791852" class="whatsapp-widget" target="_blank" aria-label="Chat on WhatsApp">
+    <span class="whatsapp-text">Chat with us</span>
+    <div class="whatsapp-icon"><i class="fab fa-whatsapp"></i></div>
+</a>
+</body>
+</html>

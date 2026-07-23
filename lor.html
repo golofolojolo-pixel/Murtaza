@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LOR — Murtaza Corporation</title>
+<meta name="description" content="Letters of recommendation from Murtaza Corporation's long-standing clients." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style>
+  /* Scale the certificate scans down for this page — the default
+     project-gallery sizing (42% column, tall 3/4 ratio) is too large
+     for a simple two-letter testimonials layout. */
+  #page-top .project-entry {
+    grid-template-columns: 260px 1fr;
+    gap: 32px;
+  }
+  #page-top .project-entry-media.is-certificate {
+    max-width: 260px;
+    aspect-ratio: 3/4;
+    max-height: 320px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  #page-top .project-entry-media.is-certificate img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  #page-top .project-entry-media.is-certificate:hover {
+    border-color: rgba(0, 0, 0, 0.18);
+  }
+  @media (max-width: 640px) {
+    #page-top .project-entry {
+      grid-template-columns: 1fr;
+    }
+    #page-top .project-entry-media.is-certificate {
+      max-width: 200px;
+      margin: 0 auto;
+    }
+  }
+
+  /* Lightbox overlay for viewing certificates/letters at full size —
+     same scrim tone and circular close badge as the site's canonical
+     .lightbox-overlay / .lightbox-close (script.js), so every full-size
+     document viewer on the site reads as one component. */
+  .cert-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 10, 12, 0.88);
+    padding: 40px 20px;
+  }
+  .cert-lightbox[hidden] { display: none; }
+  .cert-lightbox-inner {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+  }
+  .cert-lightbox-inner img {
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+  .cert-lightbox-close {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background var(--dur-hover) var(--ease-standard);
+    z-index: 2;
+  }
+  .cert-lightbox-close:hover { background: rgba(255, 255, 255, 0.25); }
+  @media (max-width: 640px) {
+    .cert-lightbox-close { top: -44px; right: 0; }
+  }
+</style>
+
+</head>
+<body>
+<div class="page-veil" aria-hidden="true"></div>
+
+<div class="header-hover-zone" id="headerHoverZone"></div>
+<header>
+  <div class="nav-inner">
+
+    <a href="index.html#top" class="logo" aria-label="Murtaza Corporation home">
+      <img src="Logos/company.png" alt="Murtaza Corporation" class="logo-img" />
+      <span class="logo-name">Murtaza Corporation</span>
+    </a>
+
+    <span class="nav-divider" aria-hidden="true"></span>
+
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#about">About</a></li>
+        <li class="nav-item-dropdown">
+          <a href="index.html#products" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Products <span class="nav-caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="pipes.html">Pipes</a></li>
+            <li><a href="fittings.html">Fittings</a></li>
+            <li><a href="valves.html">Valves</a></li>
+            <li><a href="flanges.html">Flanges</a></li>
+            <li><a href="tubes.html">Tubes</a></li>
+            <li><a href="dairy-tubes.html">Dairy tubes &amp; fittings</a></li>
+          </ul>
+        </li>
+        <li class="nav-item-dropdown">
+          <a href="index.html#resources" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Resources <span class="nav-caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="company-profile.html">Company profile</a></li>
+            <li><a href="lor.html">LOR</a></li>
+            <li><a href="mill-test-report.html">Mill Test Report</a></li>
+            <li><a href="services.html">Services</a></li>
+          </ul>
+        </li>
+        <li class="nav-item-dropdown">
+          <a href="index.html#track-record" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Updates <span class="nav-caret" aria-hidden="true">▾</span>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="linkedin-updates.html">LinkedIn Updates</a></li>
+            <li><a href="engineering-articles.html">Engineering Articles</a></li>
+            <li><a href="project-gallery.html">Project Gallery</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#contact" data-open-contact>Contact</a></li>
+      </ul>
+    </nav>
+
+    <span class="nav-divider" aria-hidden="true"></span>
+
+    <div class="nav-actions">
+      <button type="button" class="btn btn-primary btn-sm" data-open-quote>Request a quote <span class="arrow">&rarr;</span></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div id="top"></div>
+
+<section class="block" id="page-top">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow"><a href="index.html#resources" style="color:inherit;">Resources</a> / LOR</p>
+      <h2 class="heading">LOR</h2>
+      <p class="sub-copy">Don't take our word for it. Read what clients who've ordered from us for years actually say.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PAGE CONTENT — LETTERS OF RECOMMENDATION                      -->
+    <!-- Each entry: scanned letter/report on the left (click to view  -->
+    <!-- full size), company name + short context on the right.        -->
+    <!-- ============================================================ -->
+
+    <div class="project-entries">
+
+      <!-- ===== AGHA KHAN HOSPITAL ===== -->
+      <div class="project-entry reveal">
+
+        <div class="project-entry-media is-certificate"
+             data-img-src="LOR/0000047028- MURTAZA CORPORATION_AKU Supplier Review_page-0001.jpg"
+             role="button" tabindex="0"
+             aria-label="View larger: Supplier Review from Agha Khan Hospital">
+          <img src="LOR/0000047028- MURTAZA CORPORATION_AKU Supplier Review_page-0001.jpg"
+               alt="Supplier Review from Agha Khan Hospital"
+               loading="lazy" />
+        </div>
+
+        <div class="project-entry-content">
+
+          <div class="project-entry-meta">
+            <span class="project-entry-tag">Healthcare</span>
+          </div>
+
+          <h3 class="project-entry-company">Agha Khan Hospital</h3>
+          <p class="project-entry-title">Supplier Performance Review</p>
+
+          <p class="project-entry-summary">
+            Your performance has been satisfactory; we hope that this will continue in the next appraisal period.
+          </p>
+
+        </div>
+      </div>
+
+      <!-- ===== ARTITIX MILLERS ===== -->
+      <div class="project-entry reveal">
+
+        <div class="project-entry-media is-certificate"
+             data-img-src="LOR/Artistic Milliner Supplier Review_page-0001.jpg"
+             role="button" tabindex="0"
+             aria-label="View larger: Supplier Review from Artitix Millers">
+          <img src="LOR/Artistic Milliner Supplier Review_page-0001.jpg"
+               alt="Supplier Review from Artitix Millers"
+               loading="lazy" />
+        </div>
+
+        <div class="project-entry-content">
+
+          <div class="project-entry-meta">
+            <span class="project-entry-tag">Flour Milling</span>
+          </div>
+
+          <h3 class="project-entry-company">Artitix Millers</h3>
+          <p class="project-entry-title">Supplier Performance Review</p>
+
+          <p class="project-entry-summary">
+            Overall Performance Ranking: <strong>B = Average</strong>, with a Grand Total score of <strong>74.37%</strong> across On-Time-In-Full Delivery, Quality Conformance, Cost Competitiveness and Responsiveness (Jan–Mar 2024).
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- END PAGE CONTENT                                              -->
+    <!-- ============================================================ -->
+
+    <div class="view-all reveal">
+      <a href="index.html#resources" class="btn btn-ghost">
+        &larr; Back to all resources
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="Logos/company.png" alt="Murtaza Corporation" class="footer-logo-img" />
+    </div>
+
+    <div class="footer-col">
+      <h4>Address</h4>
+      <p>516/517, Sector 6-A, Mehran Town, Korangi Industrial Area, Karachi - 74900, Pakistan</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contacts</h4>
+      <p>Email: <a href="mailto:sales@murtazacorporation.com.pk">sales@murtazacorporation.com.pk</a></p>
+      <p>Phone: <a href="tel:+922135141451">+92 (21) 35141451</a></p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Links</h4>
+      <ul class="footer-link-list">
+        <li><a href="http://www.wermac.org/" target="_blank" rel="noopener">Wermac</a></li>
+        <li><a href="http://www.huikepipe.com/en/" target="_blank" rel="noopener">Hebei Huike</a></li>
+        <li><a href="http://www.yuandavalves.com/brand.html" target="_blank" rel="noopener">Yuanda Valve</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 Murtaza Corporation. All rights reserved.</div>
+</footer>
+
+<!-- Shared lightbox for viewing certificates/reports at full size -->
+<div class="cert-lightbox" id="certLightbox" hidden>
+  <div class="cert-lightbox-inner">
+    <button type="button" class="cert-lightbox-close" id="certLightboxClose" aria-label="Close">&times;</button>
+    <div id="certLightboxContent"></div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const lightbox = document.getElementById('certLightbox');
+    const lightboxContent = document.getElementById('certLightboxContent');
+    const lightboxClose = document.getElementById('certLightboxClose');
+
+    function openLightbox(src, alt) {
+      lightboxContent.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = alt || '';
+      lightboxContent.appendChild(img);
+      lightbox.hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.hidden = true;
+      lightboxContent.innerHTML = '';
+      document.body.style.overflow = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+    });
+
+    document.querySelectorAll('[data-img-src]').forEach((el) => {
+      const open = () => openLightbox(el.getAttribute('data-img-src'), el.querySelector('img')?.alt);
+      el.addEventListener('click', open);
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+      });
+    });
+  })();
+</script>
+<script src="script.js" defer></script>
+<script src="calculator-widget.js" defer></script>
+<script src="contact-widgets.js" defer></script>
+<a href="https://wa.me/923343791852" class="whatsapp-widget" target="_blank" aria-label="Chat on WhatsApp">
+    <span class="whatsapp-text">Chat with us</span>
+    <div class="whatsapp-icon"><i class="fab fa-whatsapp"></i></div>
+</a>
+</body>
+</html>
