@@ -48,6 +48,13 @@
     --dur-page:800ms;       /* page veil / full navigation transition */
 
     --stagger-step:70ms;    /* per-item delay increment inside a revealed grid */
+
+    /* Playful overshoot curve — buttons, arrows, icons only. Everything
+       else (cards, nav, reveals) keeps --ease-standard so the site
+       doesn't feel inconsistent; this is reserved for direct-interaction
+       "flow" moments (press, hover-in, hover-out). */
+    --ease-bounce:cubic-bezier(.34,1.56,.64,1);
+    --dur-flow:420ms;
   }
 
   *{box-sizing:border-box;}
@@ -74,18 +81,52 @@
 
   /* ---------- Buttons ---------- */
   .btn{
+    position:relative;overflow:hidden;isolation:isolate;
     display:inline-flex;align-items:center;justify-content:center;gap:8px;
     font-family:inherit;font-size:15px;font-weight:500;letter-spacing:-0.02em;
     border-radius:var(--radius-full);
     padding:13px 26px;
     border:1px solid transparent;
     text-decoration:none;cursor:pointer;box-sizing:border-box;
-    transition:background var(--dur-hover) var(--ease-standard), color var(--dur-hover) var(--ease-standard), border-color var(--dur-hover) var(--ease-standard), transform var(--dur-micro) var(--ease-standard), box-shadow var(--dur-hover) var(--ease-standard);
+    transition:background var(--dur-hover) var(--ease-standard), color var(--dur-hover) var(--ease-standard), border-color var(--dur-hover) var(--ease-standard), transform var(--dur-flow) var(--ease-bounce), box-shadow var(--dur-hover) var(--ease-standard);
     white-space:nowrap;
   }
-  .btn:active{transform:scale(.97);transition-duration:var(--dur-micro);}
-  .btn .arrow{display:inline-block;transition:transform var(--dur-hover) var(--ease-standard);}
-  .btn:hover .arrow{transform:translateX(3px);}
+  .btn:active{transform:scale(.94,.9);transition-duration:var(--dur-micro);transition-timing-function:var(--ease-out);}
+  .btn .arrow{display:inline-block;transition:transform var(--dur-flow) var(--ease-bounce);}
+  .btn:hover .arrow{transform:translateX(5px);}
+  .btn:active .arrow{transform:translateX(2px);}
+
+  /* ---------- Shine sweep — a soft diagonal light band that flows
+     across the button on hover. Same idea on every solid/outline
+     button so the "flow" feel is consistent. Uses mix-blend-mode so
+     it reads as a highlight rather than an opaque stripe over text. */
+  .btn::after{
+    content:"";position:absolute;top:0;left:-75%;
+    width:45%;height:100%;
+    background:linear-gradient(115deg, transparent, rgba(255,255,255,.65), transparent);
+    transform:skewX(-18deg);
+    mix-blend-mode:overlay;
+    pointer-events:none;z-index:0;
+    transition:left var(--dur-flow) var(--ease-standard);
+  }
+  .btn:hover::after{left:130%;}
+  @media (prefers-reduced-motion: reduce){
+    .btn::after{transition:none;display:none;}
+  }
+
+  /* Click ripple — injected by script.js on pointerdown */
+  .btn .btn-ripple{
+    position:absolute;border-radius:50%;
+    background:rgba(255,255,255,.55);
+    transform:scale(0);opacity:.55;
+    pointer-events:none;z-index:0;
+    animation:btnRippleOut .55s var(--ease-out) forwards;
+  }
+  @keyframes btnRippleOut{to{transform:scale(1);opacity:0;}}
+  @media (prefers-reduced-motion: reduce){
+    .btn .btn-ripple{display:none;}
+  }
+
   .btn-primary{
     background:var(--color-cobalt-ink);
     color:#fff;
@@ -94,8 +135,12 @@
   .btn-primary:hover{
     background:var(--color-cobalt-ink-hover);
     border-color:var(--color-cobalt-ink-hover);
-    transform:translateY(-2px);
-    box-shadow:0 8px 26px -6px rgba(30,55,160,.65);
+    transform:translate(var(--pull-x,0px), calc(-3px + var(--pull-y,0px))) scale(1.015);
+    box-shadow:0 10px 30px -6px rgba(30,55,160,.65);
+  }
+  .btn-primary:active{
+    background:var(--color-cobalt-ink-hover);
+    box-shadow:0 4px 14px -6px rgba(30,55,160,.55);
   }
   .btn-ghost{
     background:transparent;
@@ -106,7 +151,8 @@
     background:var(--color-obsidian);
     color:#fff;
     border-color:var(--color-obsidian);
-    transform:translateY(-2px);
+    transform:translate(var(--pull-x,0px), calc(-3px + var(--pull-y,0px))) scale(1.015);
+    box-shadow:0 10px 26px -8px rgba(0,0,0,.5);
   }
   .btn-sm{padding:9px 18px;font-size:13px;}
   .btn:focus-visible{outline:2px solid var(--color-cobalt-ink);outline-offset:2px;}
@@ -123,26 +169,46 @@
     font-family:inherit;font-size:15px;font-weight:500;letter-spacing:-0.02em;
     text-decoration:none;cursor:pointer;box-sizing:border-box;
     transition:color var(--dur-component) var(--ease-standard), border-color var(--dur-component) var(--ease-standard),
-               transform var(--dur-component) var(--ease-standard), box-shadow var(--dur-component) var(--ease-standard);
+               transform var(--dur-flow) var(--ease-bounce), box-shadow var(--dur-component) var(--ease-standard);
   }
   .btn-cta::before{
     content:"";position:absolute;inset:0;border-radius:inherit;
     background:var(--color-cobalt-ink);
     transform:scaleX(0);transform-origin:left;
-    transition:transform var(--dur-component) var(--ease-standard);
+    transition:transform var(--dur-flow) var(--ease-bounce);
     z-index:-1;
   }
   .btn-cta-label{display:inline-flex;align-items:center;gap:8px;position:relative;}
   .btn-cta:hover::before{transform:scaleX(1);}
   .btn-cta:hover{
     color:#fff;border-color:var(--color-cobalt-ink);
-    transform:translateY(-2px);
-    box-shadow:0 12px 32px -10px rgba(30,55,160,.55);
+    transform:translate(var(--pull-x,0px), calc(-3px + var(--pull-y,0px))) scale(1.02);
+    box-shadow:0 14px 34px -10px rgba(30,55,160,.55);
   }
-  .btn-cta:active{transform:translateY(0) scale(.98);transition-duration:var(--dur-micro);}
-  .btn-cta .arrow{display:inline-block;transition:transform var(--dur-hover) var(--ease-standard);}
-  .btn-cta:hover .arrow{transform:translateX(5px);}
+  .btn-cta:active{transform:translateY(-1px) scale(.96,.92);transition-duration:var(--dur-micro);transition-timing-function:var(--ease-out);}
+  .btn-cta .arrow{display:inline-block;transition:transform var(--dur-flow) var(--ease-bounce);}
+  .btn-cta:hover .arrow{animation:ctaArrowFlow var(--dur-flow) var(--ease-bounce);transform:translateX(6px);}
+  .btn-cta:active .arrow{transform:translateX(3px);}
+  @keyframes ctaArrowFlow{
+    0%{transform:translateX(0);}
+    55%{transform:translateX(11px);}
+    100%{transform:translateX(6px);}
+  }
   .btn-cta:focus-visible{outline:2px solid var(--color-cobalt-ink);outline-offset:3px;}
+
+  /* Click ripple for the CTA — sits above the fill-wipe (::before is
+     z-index:-1) but under the label, matching the .btn ripple above. */
+  .btn-cta .btn-ripple{
+    position:absolute;border-radius:50%;
+    background:rgba(255,255,255,.5);
+    transform:scale(0);opacity:.5;
+    pointer-events:none;z-index:0;
+    animation:btnRippleOut .55s var(--ease-out) forwards;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .btn-cta .btn-ripple{display:none;}
+    .btn-cta:hover .arrow{animation:none;}
+  }
 
   /* ---------- Section separations ---------- */
   section.block{
