@@ -12,6 +12,53 @@
   });
 })();
 
+// "Flow" interactions — ripple on press + a subtle magnetic pull toward
+// the cursor on every .btn / .btn-cta. Purely additive: it never touches
+// colors or layout, just makes buttons feel alive on hover/click.
+// Respects prefers-reduced-motion, and skips the magnetic pull on
+// touch devices where there's no real cursor to track.
+(function () {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) return;
+
+  const flowEls = document.querySelectorAll('.btn, .btn-cta');
+  if (!flowEls.length) return;
+
+  // Ripple on press — expands from the exact point clicked/tapped.
+  flowEls.forEach(el => {
+    el.addEventListener('pointerdown', (e) => {
+      const rect = el.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height) * 1.5;
+      const ripple = document.createElement('span');
+      ripple.className = 'btn-ripple';
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+      ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+      el.appendChild(ripple);
+      ripple.addEventListener('animationend', () => ripple.remove());
+    });
+  });
+
+  // Magnetic pull — only on devices with a real hover-capable pointer.
+  // Sets --pull-x / --pull-y, which the CSS hover transforms read.
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const MAX_PULL = 7; // px, kept small so it reads as "responsive" not "wobbly"
+    flowEls.forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const relX = (e.clientX - rect.left) / rect.width - 0.5;
+        const relY = (e.clientY - rect.top) / rect.height - 0.5;
+        el.style.setProperty('--pull-x', (relX * MAX_PULL * 2).toFixed(2) + 'px');
+        el.style.setProperty('--pull-y', (relY * MAX_PULL).toFixed(2) + 'px');
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.removeProperty('--pull-x');
+        el.style.removeProperty('--pull-y');
+      });
+    });
+  }
+})();
+
 // Products drawer — slide open to reveal remaining product categories
 (function () {
   const btn = document.getElementById('viewAllProductsBtn');
